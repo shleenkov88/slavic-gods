@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Славянские боги — что известно</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Ruslan+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0907;
+  --bg2: #16110c;
+  --card: #1c1510;
+  --ink: #f3e7d4;
+  --muted: #b7a894;
+  --gold: #c6a15b;
+  --gold2: #e7d3a1;
+  --line: rgba(198,161,91,.35);
+  --source: #8faf7a;
+  --hyp: #d2a15a;
+  --fake: #c46a62;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(141,59,52,.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(198,161,91,.08), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Philosopher", Palatino, serif;
+  font-size: 19px;
+  line-height: 1.55;
+}
+a { color: var(--gold2); }
+img { max-width: 100%; display: block; }
+.wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+nav {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(12,9,7,.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+nav .wrap { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 12px 0; flex-wrap: wrap; }
+.brand { font-family: "Ruslan Display", serif; letter-spacing: .04em; color: var(--gold2); font-size: 22px; }
+.navlinks { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; }
+.navlinks a { color: var(--muted); text-decoration: none; }
+h1, h2, h3 { font-family: "Ruslan Display", serif; font-weight: 400; letter-spacing: .03em; line-height: 1.15; }
+h1 { font-size: clamp(40px, 7vw, 74px); margin: 8px 0 12px; }
+h2 { font-size: clamp(32px, 5vw, 48px); margin: 0 0 10px; }
+h3 { font-size: 34px; margin: 0 0 8px; }
+.kicker { color: var(--gold); letter-spacing: .18em; text-transform: uppercase; font-size: 13px; }
+.lede { font-size: 22px; color: var(--muted); }
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: center; padding: 42px 0 18px; }
+.hero figure { margin: 0; border: 1px solid var(--line); padding: 8px; background: #100c09; }
+.hero img { width: 100%; height: 520px; object-fit: cover; object-position: center top; }
+figcaption, .cap { color: var(--muted); font-size: 14px; font-style: italic; margin-top: 8px; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+.badge { border: 1px solid var(--line); padding: 3px 9px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+.b-source { color: var(--source); border-color: rgba(143,175,122,.5); }
+.b-hyp { color: var(--hyp); border-color: rgba(210,161,90,.5); }
+.b-fake { color: var(--fake); border-color: rgba(196,106,98,.5); }
+.panel { border: 1px solid var(--line); background: linear-gradient(180deg, rgba(198,161,91,.06), transparent 40%), var(--bg2); padding: 22px; margin: 22px 0 36px; }
+audio { width: min(420px, 100%); margin: 8px 0 14px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 40px; }
+.card { display: block; color: inherit; text-decoration: none; background: var(--card); border: 1px solid var(--line); padding: 8px 8px 14px; }
+.card img { height: 230px; width: 100%; object-fit: cover; object-position: center top; }
+.card strong { display: block; font-family: "Ruslan Display", serif; font-size: 26px; margin: 10px 8px 2px; font-weight: 400; }
+.card span { display: block; color: var(--muted); margin: 0 8px; font-size: 15px; }
+.god { display: grid; grid-template-columns: 320px 1fr; gap: 28px; padding: 34px 0; border-top: 1px solid var(--line); }
+.god img { width: 100%; border: 1px solid var(--line); }
+.god p { margin: 0 0 12px; }
+.mark { letter-spacing: .06em; color: var(--gold); font-size: 14px; text-transform: uppercase; }
+.note { color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) {
+  .hero, .god, .grid { grid-template-columns: 1fr; }
+  .hero img { height: 420px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="brand">Славянские боги</div>
+    <div class="navlinks">
+      <a href="#how">Как читать</a>
+      <a href="#east">Киев</a>
+      <a href="#west">Поморье</a>
+      <a href="#cabinet">Выдумки</a>
+      <a href="#sources">Источники</a>
+    </div>
+  </div>
+</nav>
+<header class="wrap hero">
+  <div>
+    <div class="kicker">не пантеон, а обломки</div>
+    <h1>Что известно о славянских богах</h1>
+    <p class="lede">Священной книги не было. Общего списка для всех славян тоже. Ниже только основные имена: те, что стоят в средневековых текстах, и рядом — те, которые к богам приписали позже.</p>
+    <div class="badges">
+      <span class="badge b-source">источник</span>
+      <span class="badge b-hyp">гипотеза</span>
+      <span class="badge b-fake">выдумка</span>
+    </div>
+    <audio controls preload="none" src="audio/intro.mp3"></audio>
+    <p class="cap">Голос читает короткий пересказ. Полный разбор — в тексте. Иллюстрации — художественные образы, не портреты идолов.</p>
+  </div>
+  <figure>
+    <img src="img/perun.jpg" alt="Художественный образ Перуна">
+    <figcaption>Перун на киевском холме. Серебряная голова и золотой ус — из летописи. Топор и дуб — поздняя реконструкция.</figcaption>
+  </figure>
+</header>
+<section class="wrap" id="how">
+  <div class="panel">
+    <h2>Как читать этот сайт</h2>
+    <ol>
+      <li><strong>Источник.</strong> Так написано в летописи, договоре, проповеди или латинской хронике. Христианский автор мог понять культ неверно.</li>
+      <li><strong>Гипотеза.</strong> Вывод по имени, соседнему мифу или одной поэтической строке. Можно спорить.</li>
+      <li><strong>Выдумка.</strong> Кабинетная мифология XVIII–XIX веков, популярные книги и подделки XX века.</li>
+    </ol>
+    <p>Восточные и балтийские славяне не молились одному списку. Киев 980 года — не Аркона. Збручский идол не подписан: раскладывать его на Перуна, Мокошь и Велеса — гипотеза, не надпись.</p>
+  </div>
+</section>
+<section class="wrap" id="east">
+  <h2>Киевский холм и договоры</h2>
+  <p class="note">Повесть временных лет под 980 годом: Владимир поставил кумиры на холме вне теремного двора. Назван Перун — деревянный, голова серебряная, ус золотой — и Хорс, Дажьбог, Стрибог, Симаргл, Мокошь. Волос в этот список обычно не входит: он стоит в клятвах.</p>
+  <div class="grid">
+    <a class="card" href="#perun"><img src="img/perun.jpg" alt=""><strong>Перун</strong><span>гром, клятва, первый кумир</span></a>
+    <a class="card" href="#veles"><img src="img/veles.jpg" alt=""><strong>Велес</strong><span>скотий бог договоров</span></a>
+    <a class="card" href="#mokosh"><img src="img/mokosh.jpg" alt=""><strong>Мокошь</strong><span>единственное женское имя</span></a>
+    <a class="card" href="#dazhbog"><img src="img/dazhbog.jpg" alt=""><strong>Дажьбог</strong><span>внуки Руси в «Слове»</span></a>
+    <a class="card" href="#khors"><img src="img/khors.jpg" alt=""><strong>Хорс</strong><span>чужое солнечное имя</span></a>
+    <a class="card" href="#stribog"><img src="img/stribog.jpg" alt=""><strong>Стрибог</strong><span>ветры — его внуки</span></a>
+    <a class="card" href="#simargl"><img src="img/simargl.jpg" alt=""><strong>Симаргл</strong><span>имя без мифа</span></a>
+    <a class="card" href="#svarog"><img src="img/svarog.jpg" alt=""><strong>Сварог</strong><span>одна глосса, не культ</span></a>
+  </div>
+  <article class="god" id="perun">
+    <div><img src="img/perun.jpg" alt="Перун"><p class="cap">Образ по летописи: дерево, серебро, золотой ус. Остальное дорисовано.</p></div>
+    <div>
+      <div class="mark">восточные славяне · самое твёрдое имя</div>
+      <h3>Перун</h3>
+      <div class="badges"><span class="badge b-source">источник</span><span class="badge b-hyp">часть атрибутов — гипотеза</span></div>
+      <audio controls preload="none" src="audio/perun.mp3"></audio>
+      <p>В 980 году Перун стоит первым на киевском холме. Летопись описывает только его: деревянный, голова серебряная, ус золотой. Остальным кумирам не дано ни лица, ни «должности». После крещения 988 года идол, по той же летописи, сбросили в Днепр.</p>
+      <p>В договорах Руси с Византией 907, 945 и 971 годов дружина клянётся Перуном, а рядом назван Волос, скотий бог. Это формула присяги, не миф. Прокопий Кесарийский в VI веке пишет, что склавины и анты чтут единого бога, творца молнии. Имени он не даёт. Связь с Перуном вероятна, но это уже вывод.</p>
+      <p>Имя родственно балтскому Перкунасу. Дуб, топор и война как постоянные атрибуты — реконструкция, не летописный портрет. Илья-пророк, в которого «ушёл» гром, — народное христианство, не языческий текст.</p>
+    </div>
+  </article>
+  <article class="god" id="veles">
+    <div><img src="img/veles.jpg" alt="Велес"><p class="cap">Рога, змей и низ — реконструкция XIX–XX веков, не летописный портрет.</p></div>
+    <div>
+      <div class="mark">клятва · скот · не киевский холм</div>
+      <h3>Велес / Волос</h3>
+      <div class="badges"><span class="badge b-source">источник</span><span class="badge b-hyp">хтонический противник — гипотеза</span></div>
+      <audio controls preload="none" src="audio/veles.mp3"></audio>
+      <p>Твёрдая формула — из договоров: клялись Перуном, своим богом, и Волосом, скотьим богом. «Скотий» в тексте — про скот и богатство.</p>
+      <p>В список кумиров 980 года Волос обычно не входит. Летопись ставит его кумир на Подоле, где позже церковь святого Власия. Книжники сближали Волоса с Власием. Это христианская склейка имён.</p>
+      <p>В «Слове о полку Игореве» Боян назван Велесовым внуком. Строка важная, но она не рассказывает миф. Рога, змей и война с Перуном — схема мифологов. Источники её не содержат.</p>
+    </div>
+  </article>
+  <article class="god" id="mokosh">
+    <div><img src="img/mokosh.jpg" alt="Мокошь"><p class="cap">Пряжа и родник — гипотеза по поздним запретам, не описание кумира.</p></div>
+    <div>
+      <div class="mark">единственное женское имя пантеона</div>
+      <h3>Мокошь</h3>
+      <div class="badges"><span class="badge b-source">имя в списке</span><span class="badge b-hyp">пряжа и пятница — гипотеза</span><span class="badge b-fake">жена Перуна — выдумка</span></div>
+      <audio controls preload="none" src="audio/mokosh.mp3"></audio>
+      <p>Мокошь замыкает киевский список. Летопись не говорит, чему она ведала. Поздние поучения против язычества ставят её рядом с вилами, родом и рожаницами: ей ещё кладут требы.</p>
+      <p>В северных говорах «мокошь» значит нечистую силу, а пятницу связывали с прядением. Отсюда гипотеза: женские работы, влага, пряжа, доля. Вероятно, не доказано.</p>
+      <p>Что она жена Перуна или мать-сыра земля — выдумка нового времени.</p>
+    </div>
+  </article>
+  <article class="god" id="dazhbog">
+    <div><img src="img/dazhbog.jpg" alt="Дажьбог"><p class="cap">Солнце и «внуки» — по глоссе и «Слову». Всадники — художественный отклик.</p></div>
+    <div>
+      <div class="mark">дающий бог · предок в поэме</div>
+      <h3>Дажьбог</h3>
+      <div class="badges"><span class="badge b-source">список и «Слово»</span><span class="badge b-hyp">солнце — гипотеза по глоссе</span></div>
+      <audio controls preload="none" src="audio/dazhbog.mp3"></audio>
+      <p>Имя стоит в киевском списке между Хорсом и Стрибогом. В «Слове о полку Игореве» русские князья — Дажьбожьи внуки. Это самый сильный довод, что имя было родовым.</p>
+      <p>В славянском переводе хроники Иоанна Малалы книжник перевёл Гефеста как Сварога, а Гелиоса как Дажьбога: «солнце царь, сын Сварогов, еже есть Дажьбог». Это глосса к чужому тексту. Солнечная роль вероятна, но в списке уже есть Хорс.</p>
+      <p>Имя обычно читают как «дающий бог». Хорошая этимология, не описание жертвы.</p>
+    </div>
+  </article>
+  <article class="god" id="khors">
+    <div><img src="img/khors.jpg" alt="Хорс"><p class="cap">Всадник и диск — домысел по иранскому имени солнца.</p></div>
+    <div>
+      <div class="mark">киев · имя неславянского звучания</div>
+      <h3>Хорс</h3>
+      <div class="badges"><span class="badge b-source">список и «Слово»</span><span class="badge b-hyp">иранское солнце</span></div>
+      <audio controls preload="none" src="audio/khors.mp3"></audio>
+      <p>Хорс назван сразу после Перуна. Книжники имя путают: Гурс, Гурк, Гус. В «Беседе трёх святителей» он назван жидовином, то есть чужим. На севере Руси следов почти нет.</p>
+      <p>В «Слове о полку Игореве» Всеслав волком пересекает путь великому Хорсу. Имя обычно связывают с иранским словом «солнце». Гипотеза: бог степного круга в княжеском культе Киева. Конь на картине — домысел, не атрибут из источника.</p>
+    </div>
+  </article>
+  <article class="god" id="stribog">
+    <div><img src="img/stribog.jpg" alt="Стрибог"><p class="cap">Ветры-всадники — образ по одной строке «Слова».</p></div>
+    <div>
+      <div class="mark">одна строка сильнее целого пантеона</div>
+      <h3>Стрибог</h3>
+      <div class="badges"><span class="badge b-source">список и «Слово»</span><span class="badge b-hyp">бог ветра</span></div>
+      <audio controls preload="none" src="audio/stribog.mp3"></audio>
+      <p>В списке Владимира Стрибог есть, и больше почти нигде. Единственная живая формула — в «Слове о полку Игореве»: ветры, Стрибожьи внуки, веют с моря стрелами. Отсюда вывод, что он связан с ветром. Это всё ещё одна поэтическая строка.</p>
+    </div>
+  </article>
+  <article class="god" id="simargl">
+    <div><img src="img/simargl.jpg" alt="Симаргл"><p class="cap">Крылатый пёс — картина XX века по иранской гипотезе.</p></div>
+    <div>
+      <div class="mark">имя без единого мифа</div>
+      <h3>Симаргл</h3>
+      <div class="badges"><span class="badge b-source">только имя</span><span class="badge b-hyp">Симург</span><span class="badge b-fake">страж семян — выдумка</span></div>
+      <audio controls preload="none" src="audio/simargl.mp3"></audio>
+      <p>Самое тёмное имя киевского списка. Летопись пишет его слитно. В поучении XII века жертвы кладут Симу и Рьглу. Спорят, одно это имя или два.</p>
+      <p>Большинство исследователей видит здесь иранское существо Симург. Средневекового описания облика нет. Крылатый пёс, стерегущий зерно, — картина двадцатого века.</p>
+    </div>
+  </article>
+  <article class="god" id="svarog">
+    <div><img src="img/svarog.jpg" alt="Сварог"><p class="cap">Кузнец — иллюстрация глоссы «Сварог = Гефест», не свидетельство культа.</p></div>
+    <div>
+      <div class="mark">не входил в пантеон Владимира</div>
+      <h3>Сварог</h3>
+      <div class="badges"><span class="badge b-source">одна глосса</span><span class="badge b-hyp">огонь Сварожич</span><span class="badge b-fake">творец мира — выдумка</span></div>
+      <audio controls preload="none" src="audio/svarog.mp3"></audio>
+      <p>Сварога нет в списке 980 года. Весь фундамент — одна глосса: переводчик хроники Малалы поставил Сварога там, где у грека стоял Гефест, и назвал Дажьбога его сыном. Храма и молитвы Сварогу не записано.</p>
+      <p>Зато есть огонь Сварожич. Его поминают проповеди. У балтийских славян Титмар описывает в Ретре идол Zuarasici. «Сварожич» может значить «сын Сварога».</p>
+      <p>Кузнец, кующий мир, и алатырь-камень пришли из Велесовой книги. Это подделка XX века.</p>
+    </div>
+  </article>
+</section>
+<section class="wrap" id="west">
+  <h2>Поморье и Рюген</h2>
+  <p class="note">Здесь источники богаче: храмы, жрецы, кони для гадания. Это культы руян и поморян XII века, описанные врагами. Не общий пантеон Киевской Руси.</p>
+  <article class="god" id="svantevit">
+    <div><img src="img/svantevit.jpg" alt="Свентовит"><p class="cap">Четыре лица, рог и белый конь — по Саксону Грамматику.</p></div>
+    <div>
+      <div class="mark">Аркона · самый подробный культ</div>
+      <h3>Свентовит</h3>
+      <div class="badges"><span class="badge b-source">Саксон Грамматик</span></div>
+      <audio controls preload="none" src="audio/svantevit.mp3"></audio>
+      <p>Саксон Грамматик описывает храм на мысе Аркона, остров Рюген. Идол огромен, с четырьмя головами. В правой руке рог: его ежегодно наполняли мёдом и гадали об урожае. При храме держали белого коня. Если он переступал копья правой ногой, ждали удачного похода. В 1168 году датчане храм разрушили.</p>
+      <p>Саксон — враг культа, часть подробностей может быть расширена. Но четыре лика, конь, рог и казна — не выдумка XVIII века. Это бог руян, не общий бог всех славян.</p>
+    </div>
+  </article>
+  <article class="god" id="triglav">
+    <div><img src="img/triglav.jpg" alt="Триглав"><p class="cap">Три головы и чёрный конь — по житиям Оттона Бамбергского.</p></div>
+    <div>
+      <div class="mark">Щецин · XII век</div>
+      <h3>Триглав</h3>
+      <div class="badges"><span class="badge b-source">Эббон, Герборд</span><span class="badge b-hyp">три царства — толкование жрецов</span></div>
+      <audio controls preload="none" src="audio/triglav.mp3"></audio>
+      <p>Бог Щецина описан в житиях Оттона Бамбергского. Идол имел три головы. Жрецы говорили, что три лика значат власть над небом, землёй и преисподней. Это толкование, записанное христианами. Глаза и уста закрывали повязкой. При храме был чёрный конь для гадания.</p>
+      <p>Триглав — не всеславянская троица. Это местный западнославянский культ. Гора Триглав в Словении тем же именем не обязана.</p>
+    </div>
+  </article>
+</section>
+<section class="wrap" id="cabinet">
+  <h2>Кого часто называют богами зря</h2>
+  <audio controls preload="none" src="audio/cabinet.mp3"></audio>
+  <div class="panel">
+    <p><span class="badge b-source">слабый источник</span> <strong>Чернобог.</strong> Назван один раз. Гельмольд из Бозау пишет, что славяне на пиру проклинают злого бога по имени Чернобог. Белобога он не называет. Пара добра и зла — поздняя догадка.</p>
+    <p><span class="badge b-hyp">спорно</span> <strong>Радегаст.</strong> Титмар описывает храм в Ретре и идол Сварожича. Позже Адам Бременский называет Редигаста. Спорят, бог это или имя места. «Бог гостеприимства» — популярная дописка, в хрониках её нет.</p>
+    <p><span class="badge b-fake">выдумка</span> <strong>Лада, Лель и Полель.</strong> Имя выросло из песенного припева «ладо», а не из летописи. Богини любви Лады в средневековых источниках нет.</p>
+    <p><span class="badge b-fake">не бог летописей</span> <strong>Ярило.</strong> Персонаж весеннего обряда по описаниям XVIII века, не кумир Владимира.</p>
+    <p><span class="badge b-fake">праздник, не богиня</span> <strong>Купала.</strong> Имя ночи и огня. Отдельной богини с храмом источники не знают.</p>
+    <p><span class="badge b-hyp">спорно</span> <strong>Род и рожаницы.</strong> Церковные запреты их знают. Неясно, бог ли Род или имя судьбы. Делать из него верховного творца — шаг Велесовой книги.</p>
+    <p><span class="badge b-fake">подделка</span> <strong>Велесова книга.</strong> Текст XX века. Лингвисты считают его подделкой. Всё, что известно «только оттуда», здесь не считается свидетельством.</p>
+  </div>
+</section>
+<section class="wrap" id="sources">
+  <h2>Опора</h2>
+  <div class="panel">
+    <p>Повесть временных лет, 907, 945, 971, 980 и 988 годы. Ипатьевская летопись под 1114 годом: глосса к Иоанну Малале. «Слово о полку Игореве». Поучения против язычества. Прокопий Кесарийский, VI век.</p>
+    <p>Саксон Грамматик об Арконе. Гельмольд из Бозау о Чернобоге. Титмар Мерзебургский о Ретре. Жития Оттона Бамбергского о Триглаве. Адам Бременский о Редигасте.</p>
+  </div>
+</section>
+<footer><div class="wrap">Сайт не восстанавливает веру. Он отделяет имя в источнике от догадки и от выдумки. Озвучка — чтение пересказа, не реконструкция молитвы.</div></footer>
+</body>
+</html>
