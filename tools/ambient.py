@@ -121,7 +121,7 @@ L, R = shape(L), shape(R)
 
 out = np.stack([L, R], 1)
 out /= np.abs(out).max()
-TARGET_RMS_DB = -17.9
+TARGET_RMS_DB = -17.6
 out *= 10 ** (TARGET_RMS_DB / 20) / np.sqrt((out ** 2).mean())   # грубо; точный LUFS добирается при кодировании
 out = np.clip(out, -0.98, 0.98)
 dst = sys.argv[1] if len(sys.argv) > 1 else 'ambient.wav'
