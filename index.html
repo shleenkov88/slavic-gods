@@ -15,14 +15,14 @@
 <meta property="og:title" content="Славянские боги — что известно">
 <meta property="og:description" content="Имя в источнике, гипотеза или выдумка: честный разбор славянских богов с короткой озвучкой.">
 <meta property="og:url" content="https://shleenkov88.github.io/slavic-gods/">
-<meta property="og:image" content="https://shleenkov88.github.io/slavic-gods/img/og.jpg">
+<meta property="og:image" content="https://shleenkov88.github.io/slavic-gods/img/og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Перун на фоне грозового неба">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Славянские боги — что известно">
 <meta name="twitter:description" content="Имя в источнике, гипотеза или выдумка: честный разбор славянских богов с короткой озвучкой.">
-<meta name="twitter:image" content="https://shleenkov88.github.io/slavic-gods/img/og.jpg">
+<meta name="twitter:image" content="https://shleenkov88.github.io/slavic-gods/img/og.jpg?v=2">
 <link rel="preload" href="fonts/ruslan-display-normal-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/philosopher-normal-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -103,6 +103,17 @@ nav { position: sticky; top: 0; z-index: 5; background: rgba(12,9,7,.92); backdr
 .navlinks a:hover, .navlinks a[aria-current="true"] { color: var(--gold2); }
 .navlinks .g { display: none; }
 .totop { position: fixed; right: 16px; bottom: 16px; z-index: 6; width: 46px; height: 46px; display: grid; place-items: center; color: var(--gold2); background: rgba(22,17,12,.94); border: 1px solid var(--gold); border-radius: 50%; box-shadow: 0 4px 18px rgba(0,0,0,.5); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s, transform .2s, visibility .2s; }
+.music { position: fixed; left: 16px; bottom: 16px; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 6; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--gold2); background: rgba(22,17,12,.94); border: 1px solid var(--gold); border-radius: 50%; box-shadow: 0 4px 18px rgba(0,0,0,.5); transition: background .2s, color .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
+.music:hover { border-color: var(--gold2); }
+.music svg { display: block; }
+.music .slash { stroke: currentColor; transition: opacity .2s; }
+.music.is-on { background: var(--gold); color: #1a120a; border-color: var(--gold2); }
+.music.is-on .slash { opacity: 0; }
+.music:not(.is-on) .slash { opacity: 1; }
+.music.is-on .wave { opacity: 1; }
+.music .wave { opacity: 0; transition: opacity .2s; }
+.music.hint::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--gold2); opacity: 0; animation: mpulse 1.8s ease-out 3; pointer-events: none; }
+@keyframes mpulse { 0% { opacity: .8; transform: scale(.85); } 100% { opacity: 0; transform: scale(1.25); } }
 .totop.show { opacity: 1; visibility: visible; transform: none; }
 /* раскрывающиеся блоки */
 details.src { border-top: 1px solid var(--line); margin: 6px 0 0; }
@@ -151,7 +162,7 @@ details.src > p:last-child { margin-bottom: 4px; }
   .ptime { min-width: 76px; font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .totop { transition: none; } }
-@media print { nav, .totop, .player { display: none; } }
+@media print { nav, .totop, .music, .player { display: none; } }
 </style>
 </head>
 <body id="top">
@@ -403,6 +414,7 @@ details.src > p:last-child { margin-bottom: 4px; }
 </section>
 <footer><div class="wrap">Сайт не восстанавливает веру. Он отделяет имя в источнике от догадки и от выдумки. Озвучка — чтение пересказа, не реконструкция молитвы.</div></footer>
 <a class="totop" id="totop" href="#top" aria-label="Наверх"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<button type="button" class="music" id="music" aria-label="Включить музыку" title="Фоновая музыка"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/><path class="slash" d="M3.5 3.5l17 17" stroke-width="2.2" stroke-linecap="round"/></svg></button>
 <script>
 (function () {
   'use strict';
@@ -454,6 +466,81 @@ details.src > p:last-child { margin-bottom: 4px; }
     }, { rootMargin: '-35% 0px -55% 0px' });
     order.forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
   }
+
+  /* фоновая музыка: выключена по умолчанию, файл грузится только после первого включения */
+  (function () {
+    var mb = $('#music');
+    var VOL = 0.25, DUCK = 0.08, FADE = 1500;
+    var bg = null, want = false, resumeOnShow = false, fadeTimer = null, voiceTimer = null;
+    var KEY = 'slavic-gods-music';
+    function stored(v) { try { if (v === undefined) return localStorage.getItem(KEY); localStorage.setItem(KEY, v); } catch (e) {} return null; }
+    function voiceOn() { return $$('audio[data-title]').some(function (a) { return !a.paused && !a.ended; }); }
+    function target() { return voiceOn() ? DUCK : VOL; }
+    function ui() {
+      mb.classList.toggle('is-on', want);
+      mb.setAttribute('aria-label', want ? 'Выключить музыку' : 'Включить музыку');
+      mb.title = want ? 'Выключить музыку' : 'Включить музыку';
+    }
+    function fadeTo(v, ms, done) {
+      clearInterval(fadeTimer);
+      var from = bg.volume, t0 = Date.now();
+      if (ms <= 0 || from === v) { bg.volume = v; if (done) done(); return; }
+      fadeTimer = setInterval(function () {
+        var k = Math.min(1, (Date.now() - t0) / ms);
+        bg.volume = Math.max(0, Math.min(1, from + (v - from) * k));
+        if (k >= 1) { clearInterval(fadeTimer); if (done) done(); }
+      }, 30);
+    }
+    function start() {
+      if (!bg) {
+        bg = new Audio();
+        bg.loop = true;
+        bg.preload = 'auto';
+        bg.src = 'audio/ambient.mp3';
+        bg.volume = 0;
+      }
+      want = true; ui(); stored('on');
+      var p = bg.play();
+      var ok = function () { if (want) fadeTo(target(), FADE); };
+      if (p && p.then) {
+        p.then(ok, function () { want = false; ui(); });
+      } else { ok(); }
+    }
+    function stop() {
+      want = false; ui(); stored('off');
+      if (!bg) return;
+      fadeTo(0, FADE, function () { if (!want) bg.pause(); });
+    }
+    mb.addEventListener('click', function () { if (want) stop(); else start(); });
+    if (stored() === 'on') mb.classList.add('hint');
+
+    /* озвучка приглушает музыку, пауза возвращает громкость */
+    function retarget(ms) { if (bg && want && !bg.paused) fadeTo(target(), ms); }
+    document.addEventListener('play', function (e) {
+      if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-title')) { clearTimeout(voiceTimer); retarget(700); }
+    }, true);
+    function released(e) {
+      if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-title')) {
+        clearTimeout(voiceTimer);
+        voiceTimer = setTimeout(function () { retarget(FADE); }, 250); /* пауза между дорожками не должна дёргать громкость */
+      }
+    }
+    document.addEventListener('pause', released, true);
+    document.addEventListener('ended', released, true);
+
+    /* скрытая вкладка: пауза и возобновление */
+    document.addEventListener('visibilitychange', function () {
+      if (!bg) return;
+      if (document.hidden) {
+        if (want && !bg.paused) { resumeOnShow = true; clearInterval(fadeTimer); bg.pause(); }
+      } else if (resumeOnShow && want) {
+        resumeOnShow = false;
+        bg.volume = 0;
+        var p = bg.play();
+        if (p && p.then) p.then(function () { if (want) fadeTo(target(), FADE); }, function () { want = false; ui(); });
+      }
+    });
+  })();
 
   /* аудиоплеер */
   var players = [];
