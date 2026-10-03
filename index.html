@@ -100,11 +100,12 @@ nav { position: sticky; top: 0; z-index: 5; background: rgba(12,9,7,.92); backdr
 .brand { font-family: "Ruslan Display", serif; letter-spacing: .04em; color: var(--gold2); font-size: 22px; text-decoration: none; white-space: nowrap; }
 .navlinks { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; }
 .navlinks a { color: var(--muted); text-decoration: none; }
-.navlinks a:hover, .navlinks a[aria-current="true"] { color: var(--gold2); }
+.navlinks a[aria-current="true"] { color: var(--gold2); }
+@media (hover:hover){ .navlinks a:hover { color: var(--gold2); } }
 .navlinks .g { display: none; }
 .totop { position: fixed; right: 16px; bottom: 16px; z-index: 6; width: 46px; height: 46px; display: grid; place-items: center; color: var(--gold2); background: rgba(22,17,12,.94); border: 1px solid var(--gold); border-radius: 50%; box-shadow: 0 4px 18px rgba(0,0,0,.5); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .2s, transform .2s, visibility .2s; }
 .music { position: fixed; left: 16px; bottom: 16px; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 6; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--gold2); background: rgba(22,17,12,.94); border: 1px solid var(--gold); border-radius: 50%; box-shadow: 0 4px 18px rgba(0,0,0,.5); transition: background .2s, color .2s, border-color .2s; -webkit-tap-highlight-color: transparent; }
-.music:hover { border-color: var(--gold2); }
+@media (hover:hover){ .music:hover { border-color: var(--gold2); } }
 .music svg { display: block; }
 .music .slash { stroke: currentColor; transition: opacity .2s; }
 .music.is-on { background: var(--gold); color: #1a120a; border-color: var(--gold2); }
@@ -121,14 +122,14 @@ details.src > summary { cursor: pointer; list-style: none; display: flex; align-
 details.src > summary::-webkit-details-marker { display: none; }
 details.src > summary::before { content: ""; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform .15s; flex: none; margin: 0 4px 0 2px; }
 details.src[open] > summary::before { transform: rotate(45deg); }
-details.src > summary:hover { color: var(--gold2); }
+@media (hover:hover){ details.src > summary:hover { color: var(--gold2); } }
 details.s-now > summary { color: var(--source); }
 details.s-later > summary { color: var(--hyp); }
 details.src > p:last-child { margin-bottom: 4px; }
 /* аудиоплеер */
 .player { display: flex; align-items: center; gap: 12px; width: min(440px, 100%); margin: 8px 0 14px; padding: 8px 14px 8px 8px; background: var(--card); border: 1px solid var(--line); }
 .pbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--gold); background: rgba(198,161,91,.12); color: var(--gold2); display: grid; place-items: center; cursor: pointer; padding: 0; }
-.pbtn:hover { background: rgba(198,161,91,.25); }
+@media (hover:hover){ .pbtn:hover { background: rgba(198,161,91,.25); } }
 .pbtn svg { width: 20px; height: 20px; fill: currentColor; }
 .pbtn .i-pause { display: none; }
 .player.is-playing .pbtn .i-play { display: none; }
@@ -206,7 +207,7 @@ section.wrap > h2 { margin-top: 0; }
 .hero figure { background: var(--raised), #1f1612; }
 .panel { background: var(--raised), var(--bg2); }
 .card { transition: border-color .2s; }
-.card:hover { border-color: var(--gold); }
+@media (hover:hover){ .card:hover { border-color: var(--gold); } }
 .god { margin: 0 0 26px; padding: 26px; border: 1px solid var(--line); }
 .god:first-of-type { margin-top: 8px; }
 footer { position: relative; margin-top: 46px; border-top: 0; background: rgba(8,4,3,.38); }
