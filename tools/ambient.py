@@ -9,7 +9,7 @@
 Значит, последний отсчёт переходит в первый так же гладко, как любые два соседних.
 
 Запуск:  python3 tools/ambient.py [выход.wav]   (по умолчанию ambient.wav в текущей папке)
-Затем:   ffmpeg -i ambient.wav -c:a libmp3lame -b:a 192k -ar 44100 -ac 2 audio/ambient.mp3
+Затем:   python3 tools/encode_ambient.py ambient.wav audio/ambient.mp3   (кодирует с мягкими краями файла, см. там)
 Уровень подобран под -18,4 LUFS (как у прежнего трека).
 """
 import sys, wave
