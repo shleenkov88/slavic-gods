@@ -261,6 +261,12 @@ details.s-refs a { overflow-wrap: anywhere; }
 #more .panel > details.src { margin: 6px 0 20px; }
 #more .panel > details.src:last-child { margin-bottom: 0; }
 @media print { nav, .totop, .music, .player { display: none; } }
+/* первый экран */
+h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; }
+.hero { position: relative; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -1; inset: -30px 0 0 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 25% 30%, rgba(198,161,91,.10), transparent 70%), radial-gradient(ellipse 50% 60% at 85% 60%, rgba(140,44,44,.16), transparent 70%); }
+.subtitle { margin: 0 0 16px; padding-left: 14px; border-left: 2px solid var(--gold); font-size: clamp(20px, 2.6vw, 26px); line-height: 1.35; color: var(--gold2); max-width: 36ch; }
+@media (max-width: 860px) { .hero { padding-top: 28px; } .subtitle { max-width: none; } }
 </style>
 </head>
 <body id="top">
@@ -294,8 +300,9 @@ details.s-refs a { overflow-wrap: anywhere; }
 </nav>
 <header class="wrap hero">
   <div>
-    <div class="kicker">не пантеон, а обломки</div>
-    <h1>Что известно о славянских богах</h1>
+    <div class="kicker">Что известно о славянских богах</div>
+    <h1>Не пантеон, а обломки</h1>
+    <p class="subtitle">Что действительно известно о славянских богах — а что было придумано или реконструировано позднее?</p>
     <p class="lede">Священной книги не было. Общего списка богов для всех славян тоже. Ниже только основные имена: те, что стоят в средневековых текстах, и рядом — те, которые к богам приписали позже.</p>
     <div class="badges">
       <span class="badge b-source">источник</span>
