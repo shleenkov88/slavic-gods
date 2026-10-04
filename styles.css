@@ -836,3 +836,26 @@ details.research[open], details.scaled[open], details.fullhow[open], details.cur
 
 /* «Все боги»: вверху экрана — заголовок каталога, поиск и фильтры */
 #catalog { scroll-margin-top: calc(var(--navh, 64px) - 24px); }
+
+/* ===== навигация по длинной странице ===== */
+/* «К началу» и «К следующему разделу» в конце крупных разделов */
+.secnav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 14px; margin: 30px 0 6px; padding-top: 12px; border-top: 1px solid var(--line); }
+.secnav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font-size: 16px; color: var(--gold2); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; background: rgba(198,161,91,.06); }
+.secnav .sn-next { margin-left: auto; text-align: right; }
+@media (hover:hover) { .secnav a:hover { border-color: var(--gold); background: rgba(198,161,91,.18); } }
+@media (max-width: 560px) { .secnav a { flex: 1 1 100%; justify-content: center; text-align: center; } .secnav .sn-next { margin-left: 0; } }
+@media print { .secnav, .quick { display: none; } }
+/* быстрые переходы под шапкой — только на телефоне */
+.quick { display: none; }
+@media (max-width: 860px) {
+  .quick { display: flex; justify-content: space-between; gap: 0; overflow-x: auto; scrollbar-width: none; padding: 0; }
+  .quick::-webkit-scrollbar { display: none; }
+  .quick a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-size: 15px; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .quick a[aria-current="true"] { color: var(--gold2); border-bottom-color: var(--gold2); background: rgba(198,161,91,.10); }
+  .quick a:focus-visible { outline: 3px solid var(--gold2); outline-offset: -3px; }
+}
+/* «↑ Наверх»: на компьютере с подписью */
+@media (min-width: 861px) {
+  .totop { width: auto; min-width: 46px; padding: 0 16px 0 12px; border-radius: 23px; grid-auto-flow: column; gap: 6px; font-size: 16px; text-decoration: none; }
+  .totop::after { content: "Наверх"; }
+}
