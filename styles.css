@@ -862,3 +862,19 @@ details.research[open], details.scaled[open], details.fullhow[open], details.cur
 
 /* вводные абзацы разделов — основной текст, не подпись */
 section.wrap > p.note { font-size: 16px; }
+
+/* ===== подлинный памятник в карточке Свентовита: фото и гравюра ===== */
+.realpic { margin: 18px 0 14px; padding: 14px 16px 16px; border: 1px solid var(--line); border-left: 4px solid var(--gold); background: rgba(12,8,6,.35); }
+.realpic .rp-h { margin: 0 0 8px; font-size: 20px; color: var(--gold2); letter-spacing: .04em; text-transform: uppercase; }
+.realpic .rp-t { margin: 0 0 10px; font-size: 16px; }
+.realpic a { color: var(--gold2); }
+.realpic .rp-fig { margin: 14px 0 0; }
+.realpic .rp-fig img { display: block; height: auto; background: #fff; }
+.realpic .rp-fig figcaption { font-size: 15px; line-height: 1.45; color: var(--muted); font-style: italic; }
+.realpic .rp-photo { display: flex; gap: 14px; align-items: flex-start; }
+.realpic .rp-photo img { flex: none; width: 118px; background: #dcdcdc; border: 1px solid var(--line); }
+.realpic .rp-photo figcaption { flex: 1 1 auto; min-width: 0; }
+.realpic .rp-eng a { display: block; width: min(100%, 360px); }
+.realpic .rp-eng img { width: 100%; border: 1px solid var(--line); }
+.realpic .rp-eng figcaption { margin-top: 8px; }
+@media (min-width: 861px) { .realpic .rp-photo img { width: 140px; } .realpic .rp-eng { display: flex; gap: 16px; align-items: flex-start; } .realpic .rp-eng a { flex: none; width: 300px; } .realpic .rp-eng figcaption { margin-top: 0; flex: 1 1 auto; } }
