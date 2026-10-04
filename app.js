@@ -16,7 +16,7 @@
   function syncDetails() { if (mq.matches) $$('details.src:not(.s-refs), details.briefd:not(.closed)').forEach(function (d) { d.open = true; }); }
   syncDetails();
   if (mq.addEventListener) mq.addEventListener('change', syncDetails);
-  window.addEventListener('beforeprint', function () { $$('details.src, details.morebox, details.scaled, details.briefd, details.curio, details.fullhow, details.relics').forEach(function (d) { d.open = true; }); });
+  window.addEventListener('beforeprint', function () { $$('details.src, details.morebox, details.more, details.scaled, details.briefd, details.curio, details.fullhow, details.relics, details.research').forEach(function (d) { d.open = true; }); });
 
   /* якорь внутри свёрнутого блока: раскрыть всё, что его закрывает */
   function reveal(raw) {

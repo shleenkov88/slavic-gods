@@ -914,3 +914,39 @@ details.relics > .realpic { margin-top: 10px; }
 @media (hover:hover) { .relic a.rl-btn:hover { background: rgba(198,161,91,.4); border-color: var(--gold2); } }
 @media (max-width: 560px) { .relic a.rl-btn { display: flex; width: 100%; } }
 @media print { .rl-go { display: none; } }
+
+/* ===== карточка бога: одна полоса «Подробнее», внутри — плоские подразделы ===== */
+.god .fame { padding: 4px 0; border: 0; background: none; margin: 0 0 8px; }
+details.more { margin: 12px 0 0; }
+details.more > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 10px 16px; border: 1px solid var(--gold); background: rgba(198,161,91,.10); color: var(--gold2); }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::before { content: ""; width: 10px; height: 10px; flex: none; border-right: 3px solid currentColor; border-bottom: 3px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+details.more[open] > summary::before { transform: rotate(45deg); }
+details.more[open] > summary { background: rgba(198,161,91,.30); border-color: var(--gold2); color: #fff3d6; box-shadow: inset 5px 0 0 var(--gold2); }
+details.more[open] > summary::after { content: "Свернуть"; margin-left: auto; padding: 3px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
+details.more > summary:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
+@media (hover:hover) { details.more > summary:hover { background: rgba(198,161,91,.2); } }
+@media (max-width: 420px) { details.more[open] > summary::after { padding: 2px 9px; letter-spacing: .02em; } }
+.more-body { padding: 6px 0 0; min-width: 0; }
+/* вложенные подразделы без рамок и подложек: только отступы */
+.more-body details.sub, .more-body details.sub[open] { margin: 0; padding: 0; border: 0; background: none; }
+.more-body details.sub + details.sub { margin-top: 10px; }
+.more-body details.sub > summary { min-height: 48px; padding: 8px 0; border: 0; background: none; box-shadow: none; color: var(--gold2); font-weight: 700; }
+.more-body details.sub[open] > summary { background: none; border: 0; box-shadow: none; color: var(--gold2); padding-left: 0; }
+.more-body details.sub > summary::after, .more-body details.sub[open] > summary::after { content: none; }
+.more-body details.sub > summary.bh { font-size: 16px; letter-spacing: .1em; text-transform: uppercase; }
+.more-body details.research:not([open]) .rs-close, .more-body details.research[open] .rs-open { display: none; }
+.more-body details.research[open] > summary .rs-hint, .more-body details.relics[open] > summary .rs-hint { display: none; }
+@media (hover:hover) { .more-body details.sub > summary:hover { background: none; color: #fff3d6; } }
+.more-body details.sub > :not(summary) { margin-left: 8px; }
+.more-body details.sub > .scale, .more-body .scale { margin-top: 2px; margin-bottom: 8px; padding: 0; border: 0; background: none; }
+.more-body .brief dl > div { border-left: 0; padding-left: 0; }
+.more-body details.sub > dl { margin-bottom: 4px; }
+.more-body .relic, .more-body .realpic { padding: 4px 0 6px; border: 0; background: none; }
+.more-body details.relics > .relic + .relic { margin-top: 18px; }
+.more-body details.src { border-top: 0; margin-top: 8px; }
+.more-body .research-body { padding-top: 0; }
+@media (max-width: 560px) { .more-body details.sub > :not(summary) { margin-left: 2px; } }
+@media print { details.more > summary::after, details.more > summary::before { display: none; } }
+/* короткие карточки: одна строка индикатора; число пунктов уже есть в «Что известно точно» */
+.god.nopic .fame .fwhy { display: none; }
