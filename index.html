@@ -425,15 +425,55 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .srcpop .spf { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(198,161,91,.2); }
 .srcpop .spf a, .srcpop .spf button { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; font: inherit; font-size: 16px; color: var(--gold2); background: none; border: 0; cursor: pointer; text-decoration: underline; }
 @media (max-width: 860px) { .ill { font-size: 15px; } }
+/* навигация: компактное меню на телефоне */
+nav .here, nav .menubtn { display: none; }
+.navlinks a.sec { font-weight: 700; }
+@media (min-width: 861px) and (max-width: 1040px) { .brief dl { grid-template-columns: 1fr; } }
+.god > div, .brief dl > div, .tl { min-width: 0; }
+@media (max-width: 420px), (min-width: 861px) and (max-width: 1160px) { .tally { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 340px) { nav .navrow .here { display: none; } nav .navrow .brand { font-size: 17px; } }
+@media (min-width: 1041px) { .navlinks { gap: 0 14px; } .navlinks a, .brand { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; } }
+@media (max-width: 1040px) {
+  nav .navrow { flex-wrap: nowrap; gap: 10px; padding: 6px 0; min-height: 56px; position: relative; }
+  .brand { font-size: 19px; padding: 10px 0; }
+  nav .here { display: block; flex: 1 1 auto; min-width: 0; text-align: right; color: var(--muted); font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  nav .menubtn { display: inline-flex; align-items: center; gap: 8px; flex: none; min-height: 44px; min-width: 44px; padding: 0 14px; font: inherit; font-size: 16px; color: var(--gold2); background: rgba(198,161,91,.12); border: 1px solid var(--gold); border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  nav .menubtn[aria-expanded="true"] { background: var(--gold); color: #1a120a; }
+  nav .navlinks { display: none; position: absolute; left: -16px; right: -16px; top: 100%; margin: 0; padding: 12px 16px 16px; max-height: calc(100vh - var(--navh, 64px) - 12px); max-height: calc(100dvh - var(--navh, 64px) - 12px); overflow-y: auto; overscroll-behavior: contain; background: rgba(24,17,13,.98); border-bottom: 1px solid var(--gold); box-shadow: 0 18px 30px rgba(0,0,0,.55); grid-template-columns: 1fr 1fr; gap: 8px; font-size: 17px; }
+  nav.open .navlinks { display: grid; }
+  nav .navlinks a { flex: none; display: flex; align-items: center; min-height: 48px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; }
+  nav .navlinks a.sec { grid-column: 1 / -1; background: rgba(198,161,91,.08); }
+  nav .navlinks .g { display: flex; }
+}
+/* мобильная версия */
+@media (max-width: 860px) {
+  body { font-size: 18px; }
+  figcaption, .cap, .god .src-note { font-size: 16px; }
+  .tg { font-size: 12px; }
+  .mark { font-size: 15px; }
+  .badge { font-size: 14px; }
+  .kicker { font-size: 14px; }
+  .ptime { font-size: 14px; }
+  .pseek { height: 44px; }
+  details.src > summary { font-size: 15px; padding: 10px 2px; }
+  .scn, .lg .lgn, .tlw, .rs-hint, footer, .god .src-note, .lgx { font-size: 16px; }
+  .ccd, .ccp { font-size: 16px; }
+  .wrap { width: min(1120px, calc(100% - 28px)); }
+}
+@media (max-width: 400px) { h2 { font-size: 30px; } .god { padding: 14px; } }
 </style>
 </head>
 <body id="top">
-<nav aria-label="Оглавление">
+<nav aria-label="Оглавление" id="nav">
   <div class="wrap navrow">
     <a class="brand" href="#top">Славянские боги</a>
+    <span class="here" id="here" aria-hidden="true"></span>
+    <button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="toc"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Меню</span></button>
     <div class="navlinks" id="toc">
+      <a href="#catalog">Боги</a>
+      <a href="#intro">О проекте</a>
       <a href="#how">Как читать</a>
-      <a href="#east">Киев</a>
+      <a class="sec" href="#east">Киев</a>
       <a class="g" href="#perun">Перун</a>
       <a class="g" href="#veles">Велес</a>
       <a class="g" href="#mokosh">Мокошь</a>
@@ -443,7 +483,7 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
       <a class="g" href="#simargl">Симаргл</a>
       <a class="g" href="#svarog">Сварог</a>
       <a class="g" href="#trojan">Троян</a>
-      <a href="#west">Поморье</a>
+      <a class="sec" href="#west">Поморье</a>
       <a class="g" href="#svantevit">Свентовит</a>
       <a class="g" href="#triglav">Триглав</a>
       <a class="g" href="#svarozhich">Сварожич Ретры</a>
@@ -549,8 +589,8 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
     <h2>Как читать этот сайт</h2>
     <p>Пометки стоят у спорных и поздних утверждений. Где пометки нет, смотри блок «Откуда это знаем» в конце карточки.</p>
     <div class="legend" role="list"><div class="lg lg-s" role="listitem"><div class="lgh"><i class="ic ic-s" aria-hidden="true"></i><strong>ИСТОЧНИК</strong></div><p>Прямое или достаточно надёжное историческое свидетельство.</p><p class="lgn">В тексте: «источник»</p></div><div class="lg lg-h" role="listitem"><div class="lgh"><i class="ic ic-h" aria-hidden="true"></i><strong>ГИПОТЕЗА</strong></div><p>Исследовательская интерпретация или реконструкция, для которой нет прямого подтверждения.</p><p class="lgn">В тексте: «гипотеза»</p></div><div class="lg lg-l" role="listitem"><div class="lgh"><i class="ic ic-l" aria-hidden="true"></i><strong>ПОЗДНЯЯ РЕКОНСТРУКЦИЯ</strong></div><p>Поздний источник, позднее представление или современная реконструкция.</p><p class="lgn">В тексте: «поздний источник»</p></div><div class="lg lg-f" role="listitem"><div class="lgh"><i class="ic ic-f" aria-hidden="true"></i><strong>ВЫДУМКА / ПОДДЕЛКА</strong></div><p>То, что не имеет исторического основания или связано с заведомо недостоверным источником.</p><p class="lgn">В тексте: «выдумка», «подделка»</p></div></div><p class="lgx"><i class="ic ic-n" aria-hidden="true"></i> Две пометки стоят отдельно и не имеют цвета уровня: «слабый источник» (известие держится на одном письме или одном упоминании) и «не бог: обрядовый образ» (реальный обряд или праздник, а не божество). Их нельзя приравнивать ни к одному из четырёх уровней.</p>
-    <ol><li><i class="ic ic-s" aria-hidden="true"></i> <strong>Источник.</strong> Так написано в летописи, договоре, проповеди или латинской хронике. Но и источник не всегда прав: христианский автор мог не понять обряд или нарочно очернить его.</li><li><i class="ic ic-l" aria-hidden="true"></i> <strong>Поздний источник.</strong> Запись, сделанная намного позже описываемого времени: этнография XIX–XX веков, книги XVI–XVII веков. Она показывает, во что верили тогда, а не во времена, о которых идёт речь.</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Слабый источник.</strong> Известие, которое держится на одном письме или одном упоминании и не подтверждено другими. Мифа из него не делать.</li><li><i class="ic ic-h" aria-hidden="true"></i> <strong>Гипотеза.</strong> Вывод по имени, по соседнему мифу или по одной поэтической строке. Учёные могут спорить, и часто спорят много лет.</li><li><i class="ic ic-f" aria-hidden="true"></i> <strong>Выдумка.</strong> Кабинетная мифология XVIII–XIX веков, популярные книги и подделки XX века. Сюда относится, например, «Велесова книга».</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Не бог: обрядовый образ.</strong> Реальный обряд или праздник, которого позже стали считать богом (Ярило, Купала). Выдумка здесь только превращение их в «богов».</li></ol>
-    <p>Восточные и балтийские славяне не молились одному списку. Киев 980 года — не Аркона на Рюгене и не Щецин. Боги, названные в одном месте, могли быть неизвестны в другом. Поэтому каждый раздел привязан к своему месту и времени.</p>
+    <ol><li><i class="ic ic-s" aria-hidden="true"></i> <strong>Источник.</strong> Так написано в летописи, договоре, проповеди или латинской хронике. Но и источник не всегда прав: христианский автор мог не понять обряд или нарочно очернить его.</li><li><i class="ic ic-l" aria-hidden="true"></i> <strong>Поздний источник.</strong> Запись, сделанная намного позже описываемого времени: этнография XIX–XX веков, книги XVI–XVII веков. Она показывает представления своего времени, а не времени, о котором идёт речь.</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Слабый источник.</strong> Известие, которое держится на одном письме или одном упоминании и не подтверждено другими. Мифа из него не делать.</li><li><i class="ic ic-h" aria-hidden="true"></i> <strong>Гипотеза.</strong> Вывод по имени, по соседнему мифу или по одной поэтической строке. Учёные могут спорить, и часто спорят много лет.</li><li><i class="ic ic-f" aria-hidden="true"></i> <strong>Выдумка.</strong> Кабинетная мифология XVIII–XIX веков, популярные книги и подделки XX века. Сюда относится, например, «Велесова книга».</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Не бог: обрядовый образ.</strong> Реальный обряд или праздник, которого позже стали считать богом (Ярило, Купала). Выдумка здесь только превращение их в «богов».</li></ol>
+    <p>Надёжных свидетельств об одном общем списке богов у восточных и балтийских славян нет. Киев 980 года — не Аркона на Рюгене и не Щецин. Боги, названные в одном месте, могли быть неизвестны в другом. Поэтому каждый раздел привязан к своему месту и времени.</p>
     <p>Отдельное предупреждение про картинки. Иллюстрации на сайте — современная живопись. Ни одного достоверного изображения, подписанного именем бога, до нас не дошло. Збручский идол, четырёхгранный каменный столб, найденный в реке Збруч в 1848 году, не подписан. Раскладывать его фигуры на Перуна, Мокошь и Велеса — гипотеза, а не прочтение надписи <span class="tg t-h">гипотеза</span>.</p>
     <p>Про даты договоров. В «Повести временных лет» годы записаны «от сотворения мира»; на сайте они переведены в привычные. Клятва Олега стоит в летописи под 907 годом. Договор Олега стоит под 912 годом (в литературе его чаще называют договором 911 года). Договор Игоря стоит под 945 годом (в литературе — 944-й). Клятва Святослава у Доростола — под 971 годом. Годы сверены с текстом летописи по Ипатьевскому и Лаврентьевскому спискам (ссылки — в разделе «Опора»).</p>
     <p>Наконец, про уверенность. Если в тексте написано «вероятно», «по мнению» или «гипотеза», это значит именно то, что написано.</p>
@@ -639,7 +679,7 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
       <audio controls preload="none" src="audio/mokosh.mp3" data-title="Мокошь"></audio>
       <details class="research" id="research-mokosh"><summary><span class="rs-t"><span class="rs-open">Развернуть исследование</span><span class="rs-close">Свернуть исследование</span></span><span class="rs-hint">что в источниках · что дописали позже · откуда это знаем</span></summary><div class="research-body">
       <div class="lead">
-        <p>Мокошь стоит в списке киевских идолов последней и единственной из женщин. Летопись называет её, но не говорит, чем она ведала. Больше всего слов о ней в поучениях против язычества: там она упомянута рядом с вилами и другими, и проповедники осуждают тех, кто ещё молится ей.</p>
+        <p>Мокошь стоит в списке киевских идолов последней и единственной из женщин. Летопись называет её, но не говорит, чем она ведала. Больше всего слов о ней в поучениях против язычества: там она упомянута рядом с вилами и другими, и проповедники осуждают тех, кто, по их словам, ещё молится ей.</p>
         <p>Имя прозрачное. Оно строится от корня «мокнуть, влажный»: Мокошь — «влажная», «связанная с влагой». Иванов и Топоров считали это бесспорным. Спорят о том, чем она ведала. М. Лучиньский видит в ней небесную богиню дождей и судьбы, подобную балтийской Лайме. Были и другие версии: богиня прядения (Ильинский) или «мать жребия» (Рыбаков), но обе нашли мало поддержки. Ещё раньше В. Ягич предположил, что Мокошь — книжный вымысел, но Фасмер и Топоров это отвергли.</p>
         <p>Мансикка, Ловмянский и Аничков допускали, что Мокошь появилась в списке позже или заимствована из соседних культов <span class="tg t-h">гипотеза</span>. Многое, что мы привыкли считать «древним» в её образе, возникло в XIX–XX веках. Об этом ниже.</p>
       </div>
@@ -857,7 +897,7 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
       <details class="src s-now"><summary>Что в источниках</summary>
         <p><strong>Идол.</strong> <button type="button" class="srcb" data-src="saxo" aria-expanded="false" aria-label="Источник: Идол"><span>Источник</span></button> Саксон (книга XIV) описывает деревянного идола «сверхчеловеческих размеров»: четыре головы на четырёх шеях, две смотрят вперёд и две назад, одна налево и другая направо. Лица бритые, причёска по руянскому обычаю. В правой руке рог из разных металлов; раз в год жрец наполнял его вином и по поведению напитка предсказывал урожай. Левая рука согнута. Рядом висели уздечка, седло и огромный меч с серебряными ножнами <span class="tg t-s">источник</span>.</p>
         <p><strong>Храм и жрец.</strong> Деревянный, с красной крышей, внутренняя часть на четырёх столбах и с занавесами. Жрец — с бородой и длинными волосами, дышит только у двери. По окончании жатвы праздник, жертвы скота, медовый пирог ростом с человека. Рюгенцы платили подать в честь бога: по монете с человека в год, треть добычи, триста всадников. Были и другие храмы бога <span class="tg t-s">источник</span>.</p>
-        <p><strong>Белый конь.</strong> Из хвоста и гривы нельзя вырвать волос; кормит и ездит только жрец. Утром конь бывает мокрый, «как после битвы», и считали, что на нём ночью ездил Свентовит. Гадание: шесть копий парами крест-накрест; конь должен перешагнуть их правой ногой вперёд (знак удачи). Если левой — гадание повторяют, до трёх раз <span class="tg t-s">источник</span>.</p>
+        <p><strong>Белый конь.</strong> Из хвоста и гривы нельзя вырвать волос; кормит и ездит только жрец. Утром конь бывает мокрый, «как после битвы», и, по Саксону, считали, что на нём ночью ездил Свентовит. Гадание: шесть копий парами крест-накрест; конь должен перешагнуть их правой ногой вперёд (знак удачи). Если левой — гадание повторяют, до трёх раз <span class="tg t-s">источник</span>.</p>
         <p><strong>Гельмольд</strong> <button type="button" class="srcb" data-src="helmold" aria-expanded="false" aria-label="Источник: Гельмольд"><span>Источник</span></button> (I, 52; латинский текст MGH, с. 103) пишет, что среди многих славянских божеств преобладает Свентовит, бог земли руян, «действеннее в ответах» (в оракулах), и по сравнению с ним остальных считали как бы полубогами <span class="tg t-s">источник</span></p>
       </details>
       <details class="src s-later"><summary>Что дописали позже</summary>
@@ -1222,9 +1262,20 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
   var linkById = {};
   $$('a', toc).forEach(function (a) { linkById[a.getAttribute('href').slice(1)] = a; });
   var current = null;
+  var navEl = $('#nav'), menubtn = $('#menubtn'), here = $('#here');
+  function menu(on) { navEl.classList.toggle('open', on); menubtn.setAttribute('aria-expanded', on ? 'true' : 'false'); setNavH(); }
+  menubtn.addEventListener('click', function () {
+    var on = !navEl.classList.contains('open'); menu(on);
+    if (on && current && linkById[current]) { var l = linkById[current]; var top = l.offsetTop - toc.clientHeight / 2 + l.offsetHeight / 2; toc.scrollTop = Math.max(0, top); }
+  });
+  toc.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) menu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && navEl.classList.contains('open')) { menu(false); menubtn.focus(); } });
+  document.addEventListener('click', function (e) { if (navEl.classList.contains('open') && !e.target.closest('#nav')) menu(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 1040 && navEl.classList.contains('open')) menu(false); });
   function setCurrent(id) {
     if (current === id || !linkById[id]) return;
     current = id;
+    here.textContent = linkById[id].textContent;
     $$('a', toc).forEach(function (a) { a.removeAttribute('aria-current'); });
     var a = linkById[id];
     a.setAttribute('aria-current', 'true');
