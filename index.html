@@ -267,6 +267,40 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
 .hero::before { content: ""; position: absolute; z-index: -1; inset: -30px 0 0 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 25% 30%, rgba(198,161,91,.10), transparent 70%), radial-gradient(ellipse 50% 60% at 85% 60%, rgba(140,44,44,.16), transparent 70%); }
 .subtitle { margin: 0 0 16px; padding-left: 14px; border-left: 2px solid var(--gold); font-size: clamp(20px, 2.6vw, 26px); line-height: 1.35; color: var(--gold2); max-width: 36ch; }
 @media (max-width: 860px) { .hero { padding-top: 28px; } .subtitle { max-width: none; } }
+/* уровни достоверности: цвет + форма + текст */
+:root { --lv-s: #8fc27f; --lv-h: #e8bb4c; --lv-l: #f0836f; --lv-f: #ebe1d2; --lv-n: #c9b9a3; }
+.ic { display: inline-block; width: 12px; height: 12px; flex: none; vertical-align: -1px; box-sizing: border-box; }
+.ic-s { border-radius: 50%; background: var(--lv-s); }
+.ic-h { background: var(--lv-h); transform: rotate(45deg) scale(.82); }
+.ic-l { background: var(--lv-l); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.ic-f { background: #050302; border: 2px solid var(--lv-f); }
+.ic-n { border-radius: 50%; border: 2px solid var(--lv-n); background: transparent; }
+.tg::before, .badge::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 5px; vertical-align: 0; box-sizing: border-box; }
+.t-s::before, .b-source::before { border-radius: 50%; background: var(--lv-s); }
+.t-h::before, .b-hyp::before { background: var(--lv-h); transform: rotate(45deg) scale(.85); }
+.t-l::before { background: var(--lv-l); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.t-f::before, .b-fake::before { background: #050302; border: 1.5px solid var(--lv-f); }
+.t-w::before, .t-n::before, .b-weak::before, .b-ritual::before { border-radius: 50%; border: 1.5px solid currentColor; }
+.t-s, .b-source { color: var(--lv-s); border-color: rgba(143,194,127,.55); }
+.t-h, .b-hyp { color: var(--lv-h); border-color: rgba(232,187,76,.55); }
+.t-l { color: var(--lv-l); border-color: rgba(240,131,111,.55); }
+.t-f, .b-fake { color: var(--lv-f); border-color: rgba(235,225,210,.6); background: #0b0706; }
+.t-w, .b-weak { color: var(--lv-n); border-color: rgba(201,185,163,.55); }
+.t-n, .b-ritual { color: var(--lv-n); border-color: rgba(201,185,163,.55); }
+.badge { display: inline-flex; align-items: center; }
+/* легенда */
+.legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 12px; }
+.lg { border: 1px solid var(--line); border-top: 3px solid var(--lvc, var(--line)); background: var(--card); padding: 12px 14px 12px; }
+.lg-s { --lvc: var(--lv-s); } .lg-h { --lvc: var(--lv-h); } .lg-l { --lvc: var(--lv-l); } .lg-f { --lvc: var(--lv-f); }
+.lg .lgh { display: flex; align-items: center; gap: 8px; font-size: 15px; letter-spacing: .06em; color: var(--lvc); }
+.lg .lgh .ic { width: 14px; height: 14px; }
+.lg p { margin: 6px 0 0; font-size: 16px; line-height: 1.4; }
+.lg .lgn { color: var(--muted); font-size: 15px; font-style: italic; }
+.lgx { margin: 6px 0 4px; font-size: 16px; color: var(--muted); max-width: 900px; }
+.lvchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.lvchip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--lvc); color: var(--lvc); padding: 4px 10px; font-size: 14px; letter-spacing: .05em; text-transform: uppercase; background: rgba(12,8,6,.35); }
+@media (max-width: 860px) { .legend { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .legend { grid-template-columns: 1fr; gap: 10px; } .lvchip { font-size: 13px; padding: 5px 9px; } }
 </style>
 </head>
 <body id="top">
@@ -304,10 +338,11 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
     <h1>Не пантеон, а обломки</h1>
     <p class="subtitle">Что действительно известно о славянских богах — а что было придумано или реконструировано позднее?</p>
     <p class="lede">Священной книги не было. Общего списка богов для всех славян тоже. Ниже только основные имена: те, что стоят в средневековых текстах, и рядом — те, которые к богам приписали позже.</p>
-    <div class="badges">
-      <span class="badge b-source">источник</span>
-      <span class="badge b-hyp">гипотеза</span>
-      <span class="badge b-fake">выдумка</span>
+    <div class="lvchips" role="list" aria-label="Уровни достоверности">
+      <span class="lvchip lg-s" role="listitem"><i class="ic ic-s" aria-hidden="true"></i>источник</span>
+      <span class="lvchip lg-h" role="listitem"><i class="ic ic-h" aria-hidden="true"></i>гипотеза</span>
+      <span class="lvchip lg-l" role="listitem"><i class="ic ic-l" aria-hidden="true"></i>поздняя реконструкция</span>
+      <span class="lvchip lg-f" role="listitem"><i class="ic ic-f" aria-hidden="true"></i>выдумка / подделка</span>
     </div>
     <audio controls preload="none" src="audio/intro.mp3" data-title="Введение"></audio>
     <p class="cap">Голос читает короткий пересказ. Полный разбор — в тексте. Иллюстрации — художественные образы, не портреты идолов.</p>
@@ -317,6 +352,11 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
     <figcaption>Перун на киевском холме. В летописи — деревянный кумир, серебряная голова и золотой ус. Топор, кольчуга и орёл в летописи не описаны: это дорисовка, как и дуб. Художественная реконструкция по описаниям; подлинных изображений не сохранилось.</figcaption>
   </figure>
 </header>
+<section class="wrap" id="legend">
+  <h2>Как читать метки</h2>
+  <p class="note">Каждое утверждение с пометкой относится к одному из четырёх уровней. Пометки стоят у спорных и поздних утверждений. Где пометки нет, смотрите блок «Откуда это знаем» в конце карточки.</p>
+  <div class="legend" role="list"><div class="lg lg-s" role="listitem"><div class="lgh"><i class="ic ic-s" aria-hidden="true"></i><strong>ИСТОЧНИК</strong></div><p>Прямое или достаточно надёжное историческое свидетельство.</p><p class="lgn">В тексте: «источник»</p></div><div class="lg lg-h" role="listitem"><div class="lgh"><i class="ic ic-h" aria-hidden="true"></i><strong>ГИПОТЕЗА</strong></div><p>Исследовательская интерпретация или реконструкция, для которой нет прямого подтверждения.</p><p class="lgn">В тексте: «гипотеза»</p></div><div class="lg lg-l" role="listitem"><div class="lgh"><i class="ic ic-l" aria-hidden="true"></i><strong>ПОЗДНЯЯ РЕКОНСТРУКЦИЯ</strong></div><p>Поздний источник, позднее представление или современная реконструкция.</p><p class="lgn">В тексте: «поздний источник»</p></div><div class="lg lg-f" role="listitem"><div class="lgh"><i class="ic ic-f" aria-hidden="true"></i><strong>ВЫДУМКА / ПОДДЕЛКА</strong></div><p>То, что не имеет исторического основания или связано с заведомо недостоверным источником.</p><p class="lgn">В тексте: «выдумка», «подделка»</p></div></div><p class="lgx"><i class="ic ic-n" aria-hidden="true"></i> Две пометки стоят отдельно и не имеют цвета уровня: «слабый источник» (известие держится на одном письме или одном упоминании) и «не бог: обрядовый образ» (реальный обряд или праздник, а не божество). Их нельзя приравнивать ни к одному из четырёх уровней.</p>
+</section>
 <section class="wrap" id="intro">
   <div class="intro">
     <p>У древних славян не осталось своих записей о вере. Они не оставили ни гимнов, ни мифов, ни списка богов. Всё, что мы знаем, — это обломки: несколько имён в летописях, одна строка в поэме, описания храмов, которые сделали люди, смотревшие на чужую веру со стороны.</p>
@@ -328,7 +368,8 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
   <div class="panel">
     <h2>Как читать этот сайт</h2>
     <p>Пометки стоят у спорных и поздних утверждений. Где пометки нет, смотри блок «Откуда это знаем» в конце карточки.</p>
-    <ol><li><strong>Источник.</strong> Так написано в летописи, договоре, проповеди или латинской хронике. Но и источник не всегда прав: христианский автор мог не понять обряд или нарочно очернить его.</li><li><strong>Поздний источник.</strong> Запись, сделанная намного позже описываемого времени: этнография XIX–XX веков, книги XVI–XVII веков. Она показывает, во что верили тогда, а не во времена, о которых идёт речь.</li><li><strong>Слабый источник.</strong> Известие, которое держится на одном письме или одном упоминании и не подтверждено другими. Мифа из него не делать.</li><li><strong>Гипотеза.</strong> Вывод по имени, по соседнему мифу или по одной поэтической строке. Учёные могут спорить, и часто спорят много лет.</li><li><strong>Выдумка.</strong> Кабинетная мифология XVIII–XIX веков, популярные книги и подделки XX века. Сюда относится, например, «Велесова книга».</li><li><strong>Не бог: обрядовый образ.</strong> Реальный обряд или праздник, которого позже стали считать богом (Ярило, Купала). Выдумка здесь только превращение их в «богов».</li></ol>
+    <div class="legend" role="list"><div class="lg lg-s" role="listitem"><div class="lgh"><i class="ic ic-s" aria-hidden="true"></i><strong>ИСТОЧНИК</strong></div><p>Прямое или достаточно надёжное историческое свидетельство.</p><p class="lgn">В тексте: «источник»</p></div><div class="lg lg-h" role="listitem"><div class="lgh"><i class="ic ic-h" aria-hidden="true"></i><strong>ГИПОТЕЗА</strong></div><p>Исследовательская интерпретация или реконструкция, для которой нет прямого подтверждения.</p><p class="lgn">В тексте: «гипотеза»</p></div><div class="lg lg-l" role="listitem"><div class="lgh"><i class="ic ic-l" aria-hidden="true"></i><strong>ПОЗДНЯЯ РЕКОНСТРУКЦИЯ</strong></div><p>Поздний источник, позднее представление или современная реконструкция.</p><p class="lgn">В тексте: «поздний источник»</p></div><div class="lg lg-f" role="listitem"><div class="lgh"><i class="ic ic-f" aria-hidden="true"></i><strong>ВЫДУМКА / ПОДДЕЛКА</strong></div><p>То, что не имеет исторического основания или связано с заведомо недостоверным источником.</p><p class="lgn">В тексте: «выдумка», «подделка»</p></div></div><p class="lgx"><i class="ic ic-n" aria-hidden="true"></i> Две пометки стоят отдельно и не имеют цвета уровня: «слабый источник» (известие держится на одном письме или одном упоминании) и «не бог: обрядовый образ» (реальный обряд или праздник, а не божество). Их нельзя приравнивать ни к одному из четырёх уровней.</p>
+    <ol><li><i class="ic ic-s" aria-hidden="true"></i> <strong>Источник.</strong> Так написано в летописи, договоре, проповеди или латинской хронике. Но и источник не всегда прав: христианский автор мог не понять обряд или нарочно очернить его.</li><li><i class="ic ic-l" aria-hidden="true"></i> <strong>Поздний источник.</strong> Запись, сделанная намного позже описываемого времени: этнография XIX–XX веков, книги XVI–XVII веков. Она показывает, во что верили тогда, а не во времена, о которых идёт речь.</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Слабый источник.</strong> Известие, которое держится на одном письме или одном упоминании и не подтверждено другими. Мифа из него не делать.</li><li><i class="ic ic-h" aria-hidden="true"></i> <strong>Гипотеза.</strong> Вывод по имени, по соседнему мифу или по одной поэтической строке. Учёные могут спорить, и часто спорят много лет.</li><li><i class="ic ic-f" aria-hidden="true"></i> <strong>Выдумка.</strong> Кабинетная мифология XVIII–XIX веков, популярные книги и подделки XX века. Сюда относится, например, «Велесова книга».</li><li><i class="ic ic-n" aria-hidden="true"></i> <strong>Не бог: обрядовый образ.</strong> Реальный обряд или праздник, которого позже стали считать богом (Ярило, Купала). Выдумка здесь только превращение их в «богов».</li></ol>
     <p>Восточные и балтийские славяне не молились одному списку. Киев 980 года — не Аркона на Рюгене и не Щецин. Боги, названные в одном месте, могли быть неизвестны в другом. Поэтому каждый раздел привязан к своему месту и времени.</p>
     <p>Отдельное предупреждение про картинки. Иллюстрации на сайте — современная живопись. Ни одного достоверного изображения, подписанного именем бога, до нас не дошло. Збручский идол, четырёхгранный каменный столб, найденный в реке Збруч в 1848 году, не подписан. Раскладывать его фигуры на Перуна, Мокошь и Велеса — гипотеза, а не прочтение надписи <span class="tg t-h">гипотеза</span>.</p>
     <p>Про даты договоров. В «Повести временных лет» годы записаны «от сотворения мира»; на сайте они переведены в привычные. Клятва Олега стоит в летописи под 907 годом. Договор Олега стоит под 912 годом (в литературе его чаще называют договором 911 года). Договор Игоря стоит под 945 годом (в литературе — 944-й). Клятва Святослава у Доростола — под 971 годом. Годы сверены с текстом летописи по Ипатьевскому и Лаврентьевскому спискам (ссылки — в разделе «Опора»).</p>
