@@ -553,6 +553,29 @@
     var m = Math.floor(t / 60), s = Math.floor(t % 60);
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
+  /* скорость озвучки: одна на все плееры, хранится в localStorage; музыку не затрагивает */
+  var RATES = [0.75, 1, 1.25, 1.5, 2], RKEY = 'slavic-gods-rate', rate = 1, speedBtns = [];
+  try { var sr = parseFloat(localStorage.getItem(RKEY)); if (RATES.indexOf(sr) > -1) rate = sr; } catch (e) {}
+  function rateLabel(r) { return String(r).replace('.', ',') + '×'; }
+  function applyRate(a) {
+    try {
+      a.defaultPlaybackRate = rate; a.playbackRate = rate;
+      a.preservesPitch = true; a.mozPreservesPitch = true; a.webkitPreservesPitch = true;
+    } catch (e) {}
+  }
+  function setRate(r, save) {
+    rate = r;
+    if (save) { try { localStorage.setItem(RKEY, String(r)); } catch (e) {} }
+    players.forEach(applyRate);
+    speedBtns.forEach(function (b) {
+      b.textContent = rateLabel(rate);
+      b.setAttribute('aria-label', 'Скорость озвучки: ' + rateLabel(rate) + '. Нажмите, чтобы изменить');
+      b.title = 'Скорость озвучки';
+    });
+  }
+  window.addEventListener('storage', function (e) {
+    if (e.key === RKEY) { var v = parseFloat(e.newValue); if (RATES.indexOf(v) > -1) setRate(v, false); }
+  });
   $$('audio[data-title]').forEach(function (a) {
     var title = a.getAttribute('data-title');
     a.removeAttribute('controls');
@@ -566,7 +589,8 @@
       '<svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
       '<svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>' +
       '<input class="pseek" type="range" min="0" max="1000" step="1" value="0">' +
-      '<span class="ptime" role="timer" aria-live="off">0:00 / 0:00</span>';
+      '<span class="ptime" role="timer" aria-live="off">0:00 / 0:00</span>' +
+      '<button type="button" class="pspeed"></button>';
     a.parentNode.insertBefore(box, a);
     box.appendChild(a);
     var btn = $('.pbtn', box), seek = $('.pseek', box), time = $('.ptime', box);
@@ -619,7 +643,13 @@
       a.currentTime = Math.max(0, Math.min(a.duration, a.currentTime + d));
       ui();
     });
+    var sp = $('.pspeed', box);
+    speedBtns.push(sp);
+    sp.addEventListener('click', function () { setRate(RATES[(RATES.indexOf(rate) + 1) % RATES.length], true); });
+    ['loadstart', 'loadedmetadata', 'play'].forEach(function (ev) { a.addEventListener(ev, function () { if (a.playbackRate !== rate) applyRate(a); }); });
     players.push(a);
+    applyRate(a);
+    setRate(rate, false);
     ui();
   });
 })();

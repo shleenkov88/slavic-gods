@@ -960,3 +960,11 @@ details.more > summary:focus-visible { outline: 3px solid var(--gold2); outline-
   nav .brand { font-size: 17px; letter-spacing: .02em; }
   nav .menubtn { padding: 0 12px; gap: 6px; }
 }
+
+/* скорость озвучки */
+.pspeed { flex: none; min-width: 44px; height: 44px; padding: 0 8px; border: 1px solid var(--gold); border-radius: 22px; background: rgba(198,161,91,.12); color: var(--gold2); font: 700 15px/1 system-ui, sans-serif; font-variant-numeric: tabular-nums; cursor: pointer; white-space: nowrap; }
+@media (hover:hover) { .pspeed:hover { background: rgba(198,161,91,.25); } }
+.pspeed:focus-visible { outline: 3px solid var(--gold2); outline-offset: 2px; }
+@media (max-width: 380px) { .player { gap: 6px; padding-right: 8px; } .pspeed { padding: 0 6px; } }
+.player .pseek { flex: 1 1 0; width: 0; min-width: 40px; }
+.hero > div { min-width: 0; }
