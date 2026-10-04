@@ -859,3 +859,6 @@ details.research[open], details.scaled[open], details.fullhow[open], details.cur
   .totop { width: auto; min-width: 46px; padding: 0 16px 0 12px; border-radius: 23px; grid-auto-flow: column; gap: 6px; font-size: 16px; text-decoration: none; }
   .totop::after { content: "Наверх"; }
 }
+
+/* вводные абзацы разделов — основной текст, не подпись */
+section.wrap > p.note { font-size: 16px; }
