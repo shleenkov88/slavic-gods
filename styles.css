@@ -878,3 +878,14 @@ section.wrap > p.note { font-size: 16px; }
 .realpic .rp-eng img { width: 100%; border: 1px solid var(--line); }
 .realpic .rp-eng figcaption { margin-top: 8px; }
 @media (min-width: 861px) { .realpic .rp-photo img { width: 140px; } .realpic .rp-eng { display: flex; gap: 16px; align-items: flex-start; } .realpic .rp-eng a { flex: none; width: 300px; } .realpic .rp-eng figcaption { margin-top: 0; flex: 1 1 auto; } }
+
+/* сворачиваемые блоки «Реликвии и находки» */
+details.relics { margin: 14px 0 0; }
+details.relics > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 52px; padding: 10px 16px; border: 1px solid var(--gold); background: rgba(198,161,91,.10); color: var(--gold2); }
+details.relics > summary::-webkit-details-marker { display: none; }
+details.relics > summary::before { content: ""; width: 10px; height: 10px; flex: none; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translate(-2px, -2px); transition: transform .15s; }
+details.relics[open] > summary::before { transform: rotate(-135deg) translate(-2px, -2px); }
+details.relics[open] > summary .rs-hint { display: none; }
+details.relics > summary:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
+@media (hover:hover) { details.relics > summary:hover { background: rgba(198,161,91,.2); } }
+details.relics > .realpic { margin-top: 10px; }
