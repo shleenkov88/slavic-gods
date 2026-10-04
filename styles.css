@@ -889,3 +889,20 @@ details.relics[open] > summary .rs-hint { display: none; }
 details.relics > summary:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
 @media (hover:hover) { details.relics > summary:hover { background: rgba(198,161,91,.2); } }
 details.relics > .realpic { margin-top: 10px; }
+
+/* объекты внутри «Реликвии и находки» */
+.relics-body { padding-top: 2px; }
+.relic { margin: 12px 0 0; padding: 14px 16px 16px; border: 1px solid var(--line); border-left: 4px solid var(--gold); background: rgba(12,8,6,.35); min-width: 0; }
+.relic .rl-h { margin: 0 0 10px; font-size: 20px; line-height: 1.25; color: var(--gold2); }
+.rl-meta { margin: 0 0 12px; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; font-size: 16px; }
+.rl-meta > div { display: contents; }
+.rl-meta dt { color: var(--gold); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; padding-top: 2px; }
+.rl-meta dd { margin: 0; overflow-wrap: anywhere; }
+.relic > p { margin: 0 0 10px; font-size: 16px; }
+.relic .rl-src { font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.relic a { color: var(--gold2); }
+.relic .rl-fig { margin: 12px 0 12px; max-width: 520px; }
+.god .relic .rl-fig img { display: block; width: 100%; height: auto; object-fit: contain; border: 1px solid var(--line); background: #1a130d; }
+.relic .rl-fig-p { max-width: 300px; }
+.relic .rl-fig figcaption { font-size: 15px; line-height: 1.45; margin-top: 8px; overflow-wrap: anywhere; }
+@media (max-width: 560px) { .rl-meta { grid-template-columns: minmax(0, 1fr); gap: 0; } .rl-meta > div { display: block; margin-bottom: 8px; } .relic { padding: 12px 12px 14px; } }
