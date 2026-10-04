@@ -906,3 +906,11 @@ details.relics > .realpic { margin-top: 10px; }
 .relic .rl-fig-p { max-width: 300px; }
 .relic .rl-fig figcaption { font-size: 15px; line-height: 1.45; margin-top: 8px; overflow-wrap: anywhere; }
 @media (max-width: 560px) { .rl-meta { grid-template-columns: minmax(0, 1fr); gap: 0; } .rl-meta > div { display: block; margin-bottom: 8px; } .relic { padding: 12px 12px 14px; } }
+
+.relic .rl-go { margin: 4px 0 12px; }
+.relic a.rl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 10px 20px; border: 2px solid var(--gold); border-radius: 6px; background: rgba(198,161,91,.22); color: #fff3d6; font-size: 17px; font-weight: 700; line-height: 1.25; text-decoration: none; max-width: 100%; box-sizing: border-box; text-align: center; }
+.relic a.rl-btn .rl-arr { font-size: 20px; line-height: 1; color: var(--gold2); }
+.relic a.rl-btn:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
+@media (hover:hover) { .relic a.rl-btn:hover { background: rgba(198,161,91,.4); border-color: var(--gold2); } }
+@media (max-width: 560px) { .relic a.rl-btn { display: flex; width: 100%; } }
+@media print { .rl-go { display: none; } }
