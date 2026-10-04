@@ -783,3 +783,33 @@ p.cap, .cap, figcaption, .mapcap { font-style: italic; }
 .brief dt, dl.rg dt, .gp small, .pinfo .pk, .stop .rgn, .fame .fwhy { font-size: 15px; }
 .kicker, .hero .kicker { font-size: 14px; }
 @media (max-width: 380px) { .player { gap: 8px; padding-right: 10px; } .ptime { min-width: 72px; font-size: 15px; } }
+
+/* ===== раскрываемые блоки: понятное состояние «закрыто / открыто» ===== */
+/* стрелка: закрыто ▸ (вправо), открыто ▾ (вниз) */
+details.research > summary::before, details.scaled > summary::before, details.fullhow > summary::before,
+details.briefd > summary::before { content: ""; width: 10px; height: 10px; flex: none; border-right: 3px solid currentColor; border-bottom: 3px solid currentColor; transform: rotate(-45deg); transition: transform .15s; }
+details.research[open] > summary::before, details.scaled[open] > summary::before, details.fullhow[open] > summary::before,
+details.briefd[open] > summary::before { transform: rotate(45deg); }
+details.curio > summary::after { border-right-width: 3px; border-bottom-width: 3px; transform: rotate(-45deg); }
+details.curio[open] > summary::after { transform: rotate(45deg); }
+details.src > summary::before { border-right-width: 3px; border-bottom-width: 3px; }
+.morebox > summary::after { content: "▸"; transform: none; }
+.morebox[open] > summary::after { content: "▾"; transform: none; }
+/* раскрытое: подложка, рамка, подпись «Свернуть» */
+details.research[open] > summary, details.scaled[open] > summary, details.fullhow[open] > summary {
+  background: rgba(198,161,91,.34); border-color: var(--gold2); color: #fff3d6; font-weight: 700; box-shadow: inset 5px 0 0 var(--gold2); }
+details.briefd[open] > summary { color: #fff3d6; background: rgba(198,161,91,.22); box-shadow: inset 5px 0 0 var(--gold2); padding-left: 12px; }
+details.briefd > summary { padding-left: 2px; }
+details.scaled[open] > summary .rs-hint, details.fullhow[open] > summary .rs-hint, details.research[open] > summary .rs-hint { display: none; }
+details.scaled[open] > summary::after, details.fullhow[open] > summary::after, details.briefd[open] > summary::after {
+  content: "Свернуть"; margin-left: auto; padding: 3px 12px; border: 1px solid currentColor; border-radius: 999px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
+details.research[open] > summary .rs-t { flex: 1 1 auto; }
+details.curio[open] > summary { background: rgba(198,161,91,.22); box-shadow: inset 5px 0 0 var(--gold2); }
+details.curio[open] > summary::before { content: "Свернуть"; order: 5; margin-left: auto; padding: 3px 12px; border: 1px solid var(--gold2); border-radius: 999px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold2); }
+details.curio > summary::after { order: 6; margin-left: 10px; }
+details.src[open] > summary { color: var(--gold2); }
+details.morebox[open] > summary { background: rgba(198,161,91,.32); color: #fff3d6; box-shadow: inset 5px 0 0 var(--gold2); }
+.morebox .mbx { display: none; padding: 3px 12px; border: 1px solid currentColor; border-radius: 999px; font: 600 14px/1.3 system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.morebox[open] .mbx { display: inline-block; }
+details.research[open], details.scaled[open], details.fullhow[open], details.curio[open] { background: rgba(198,161,91,.05); }
+@media (max-width: 420px) { details.scaled[open] > summary::after, details.fullhow[open] > summary::after, details.briefd[open] > summary::after, details.curio[open] > summary::before { padding: 2px 9px; letter-spacing: .02em; } }
