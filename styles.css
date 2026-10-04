@@ -759,3 +759,27 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
 .god.nopic details.research > summary .rs-hint { display: none; }
 .god.nopic details.research > summary { min-height: 48px; border-radius: 0; }
 @media (max-width: 560px) { .phold { height: 120px; } .phold .wheel { width: 68px; height: 68px; } }
+
+/* ===== читаемость: минимальные размеры текста ===== */
+/* основной читаемый текст — не меньше 16px; подписи, пояснения и курсив — не меньше 15px; плашки и метки — не меньше 14px */
+dt, li.gl-l, span.yr, span.sw, .mark, .ccd, .hxw, .lgh, .hint4t, .hint4a, .backread .bl, .backread .bs, .plbtn b, .ctl b, details.src > summary, summary.bh, .p-read, p.scn, p.lgn, p.src-note, .research-body .src-note { font-size: 16px; }
+p.scn, p.lgn, .src-note { font-style: italic; }
+.rs-hint, .fwhy, .ill, .ill strong, .ill span, p.cap, .cap, .note, p.note, figcaption, .mapcap, p.pk, p.rgn, .maplegend li, p.mx, small, .plbtn small, .ptime, .sbtn, .sbtn span, h4.bh, .stt, .tlw, p.tlw, footer .wrap { font-size: 15px; }
+.tg, .badge, .chl, .srcb span, .tl span, .tl, .ccill, .ccno, .lvchip, .hxl, .kicker, .grat em, .mknames em, .mknames span, .menubtn span { font-size: 14px; }
+.ill, .ill strong { font-size: 15px; }
+p.cap, .cap, figcaption, .mapcap { font-style: italic; }
+@media (max-width: 860px) { .card span { font-size: 15px; } }
+@media (max-width: 560px) { .lvchip { font-size: 14px; } .ptime { font-size: 15px; } }
+/* плеер: области нажатия не меньше 44px */
+.player { min-height: 60px; }
+.pbtn { width: 44px; height: 44px; min-width: 44px; }
+.pseek { height: 44px; }
+.pseek::-webkit-slider-thumb { width: 24px; height: 24px; margin-top: -9px; }
+.pseek::-moz-range-thumb { width: 20px; height: 20px; }
+.pseek::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; }
+.pseek::-moz-range-track, .pseek::-moz-range-progress { height: 8px; border-radius: 4px; }
+.ptime { min-width: 88px; }
+@media (max-width: 860px) { .ptime { min-width: 84px; } }
+.brief dt, dl.rg dt, .gp small, .pinfo .pk, .stop .rgn, .fame .fwhy { font-size: 15px; }
+.kicker, .hero .kicker { font-size: 14px; }
+@media (max-width: 380px) { .player { gap: 8px; padding-right: 10px; } .ptime { min-width: 72px; font-size: 15px; } }
