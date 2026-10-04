@@ -317,44 +317,13 @@
   }
   if ('IntersectionObserver' in window) {
     /* какой пункт меню подсвечивать: разделы страницы по порядку → пункт меню */
-    var SEC = [['catalog', 'catalog'], ['intro', 'catalog'], ['how', 'how'], ['myths', 'myths'], ['east', 'catalog'], ['west', 'catalog'], ['curious', 'curious']];
+    var SEC = [['catalog', 'catalog'], ['intro', 'catalog'], ['how', 'how'], ['myths', 'myths'], ['east', 'catalog'], ['west', 'catalog'], ['curious', 'curious'], ['map', 'map'], ['chrono', 'chrono'], ['srctypes', 'srctypes'], ['sources', 'srctypes']];
     var vis = {};
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { vis[e.target.id] = e.isIntersecting; });
       for (var i = SEC.length - 1; i >= 0; i--) { if (vis[SEC[i][0]]) { setCurrent(SEC[i][1]); break; } }
     }, { rootMargin: '-35% 0px -55% 0px' });
     SEC.forEach(function (p) { var el = document.getElementById(p[0]); if (el) io.observe(el); });
-  }
-
-  /* быстрые переходы на телефоне: подсветка текущего раздела */
-  var quick = $('#quick');
-  if (quick) {
-    var QS = [['catalog', 'catalog'], ['intro', 'catalog'], ['how', ''], ['myths', 'myths'], ['east', 'catalog'], ['west', 'catalog'], ['curious', ''], ['where', ''], ['map', 'map'], ['chrono', 'chrono'], ['cabinet', ''], ['more', ''], ['srctypes', 'srctypes'], ['sources', 'srctypes']];
-    var qLinks = {};
-    $$('a', quick).forEach(function (a) { qLinks[a.getAttribute('href').slice(1)] = a; });
-    var qCur = null, qBusy = false;
-    var qUpdate = function () {
-      qBusy = false;
-      var probe = nav.offsetHeight + window.innerHeight * 0.3, id = '';
-      for (var i = 0; i < QS.length; i++) {
-        var el = document.getElementById(QS[i][0]);
-        if (!el) continue;
-        var r = el.getBoundingClientRect();
-        if (r.height && r.top <= probe && r.bottom > probe) id = QS[i][1];
-      }
-      if (id === qCur) return;
-      qCur = id;
-      $$('a', quick).forEach(function (a) { a.removeAttribute('aria-current'); });
-      var a = id && qLinks[id];
-      if (a) {
-        a.setAttribute('aria-current', 'true');
-        if (quick.scrollWidth > quick.clientWidth) quick.scrollTo({ left: a.offsetLeft - (quick.clientWidth - a.offsetWidth) / 2, behavior: 'auto' });
-      }
-    };
-    var qSchedule = function () { if (!qBusy) { qBusy = true; requestAnimationFrame(qUpdate); } };
-    window.addEventListener('scroll', qSchedule, { passive: true });
-    window.addEventListener('resize', qSchedule);
-    qUpdate();
   }
 
   /* «Поиск» в меню: к строке поиска и фокус в неё */

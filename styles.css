@@ -844,16 +844,8 @@ details.research[open], details.scaled[open], details.fullhow[open], details.cur
 .secnav .sn-next { margin-left: auto; text-align: right; }
 @media (hover:hover) { .secnav a:hover { border-color: var(--gold); background: rgba(198,161,91,.18); } }
 @media (max-width: 560px) { .secnav a { flex: 1 1 100%; justify-content: center; text-align: center; } .secnav .sn-next { margin-left: 0; } }
-@media print { .secnav, .quick { display: none; } }
-/* быстрые переходы под шапкой — только на телефоне */
-.quick { display: none; }
-@media (max-width: 860px) {
-  .quick { display: flex; justify-content: space-between; gap: 0; overflow-x: auto; scrollbar-width: none; padding: 0; }
-  .quick::-webkit-scrollbar { display: none; }
-  .quick a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-size: 15px; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
-  .quick a[aria-current="true"] { color: var(--gold2); border-bottom-color: var(--gold2); background: rgba(198,161,91,.10); }
-  .quick a:focus-visible { outline: 3px solid var(--gold2); outline-offset: -3px; }
-}
+@media print { .secnav { display: none; } }
+
 /* «↑ Наверх»: на компьютере с подписью */
 @media (min-width: 861px) {
   .totop { width: auto; min-width: 46px; padding: 0 16px 0 12px; border-radius: 23px; grid-auto-flow: column; gap: 6px; font-size: 16px; text-decoration: none; }
@@ -950,3 +942,21 @@ details.more > summary:focus-visible { outline: 3px solid var(--gold2); outline-
 @media print { details.more > summary::after, details.more > summary::before { display: none; } }
 /* короткие карточки: одна строка индикатора; число пунктов уже есть в «Что известно точно» */
 .god.nopic .fame .fwhy { display: none; }
+
+/* шапка на телефоне и планшете: одна тонкая строка (название слева, «Меню» справа); быстрые ссылки — наверху меню */
+@media (max-width: 1119px) {
+  nav .navrow { min-height: 52px; padding: 4px 0; gap: 8px; }
+  nav .brand { padding: 0; font-size: 19px; line-height: 1.1; white-space: nowrap; flex: 0 1 auto; min-width: 0; }
+  nav .menubtn { margin-left: auto; padding: 0 14px; }
+  nav .navrow { position: static; }
+  nav .navlinks { left: 0; right: 0; padding-left: 16px; padding-right: 16px; }
+}
+@media (max-width: 480px) {
+  nav .here { display: none; }
+  nav .navlinks { grid-template-columns: 1fr; }
+  nav .navlinks a { min-height: 52px; font-size: 18px; }
+}
+@media (max-width: 360px) {
+  nav .brand { font-size: 17px; letter-spacing: .02em; }
+  nav .menubtn { padding: 0 12px; gap: 6px; }
+}
