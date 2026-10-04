@@ -263,7 +263,7 @@
       var keys = btn.getAttribute('data-src').split(' ');
       var html = keys.map(function (k) {
         var e = SRC[k]; if (!e) return '';
-        return '<div class="sp"><a href="' + esc2(e.u[0]) + '" target="_blank" rel="noopener">' + esc2(e.t) + '</a>' + (e.u[1] ? ' · <a href="' + esc2(e.u[1]) + '" target="_blank" rel="noopener">комментарий</a>' : '') + '<div class="sps ' + e.k + '">' + esc2(e.s) + '</div></div>';
+        return '<div class="sp"><a href="' + esc2(e.u[0]) + '" target="_blank" rel="noopener noreferrer">' + esc2(e.t) + '</a>' + (e.u[1] ? ' · <a href="' + esc2(e.u[1]) + '" target="_blank" rel="noopener noreferrer">комментарий</a>' : '') + '<div class="sps ' + e.k + '">' + esc2(e.s) + '</div></div>';
       }).join('');
       var art = btn.closest('article.god');
       var refs = art ? 'refs-' + art.id : btn.closest('#cabinet') ? 'refs-cabinet' : 'refs-online';
