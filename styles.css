@@ -813,3 +813,20 @@ details.morebox[open] > summary { background: rgba(198,161,91,.32); color: #fff3
 .morebox[open] .mbx { display: inline-block; }
 details.research[open], details.scaled[open], details.fullhow[open], details.curio[open] { background: rgba(198,161,91,.05); }
 @media (max-width: 420px) { details.scaled[open] > summary::after, details.fullhow[open] > summary::after, details.briefd[open] > summary::after, details.curio[open] > summary::before { padding: 2px 9px; letter-spacing: .02em; } }
+
+/* ===== краткая легенда значков над фильтрами каталога ===== */
+.catlegend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 14px 0 0; padding: 6px 12px; border: 1px solid var(--line); background: rgba(12,8,6,.35); }
+.catlegend .clt { color: var(--muted); font-size: 15px; }
+.catlegend .clist { display: flex; flex-wrap: wrap; gap: 2px 14px; list-style: none; margin: 0; padding: 0; flex: 1 1 auto; }
+.catlegend .clist li { display: inline-flex; align-items: center; gap: 6px; color: var(--lvc); font-size: 15px; white-space: nowrap; min-height: 28px; }
+.catlegend .cla { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold2); font-size: 15px; white-space: nowrap; margin-left: auto; }
+.catlegend .clist .lg-s { --lvc: var(--lv-s); } .catlegend .clist .lg-h { --lvc: var(--lv-h); } .catlegend .clist .lg-l { --lvc: var(--lv-l); } .catlegend .clist .lg-f { --lvc: var(--lv-f); }
+@media (max-width: 560px) {
+  .catlegend { padding: 4px 10px; }
+  .catlegend .clist { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 0 18px; flex: 1 1 100%; order: 2; }
+  .catlegend .clist li { white-space: normal; }
+  .catlegend .cla { order: 1; margin-left: auto; }
+  .catlegend .clt { order: 0; }
+}
+@media (max-width: 340px) { .catlegend .clist { grid-template-columns: 1fr; } }
+@media print { .catlegend .cla { display: none; } }
