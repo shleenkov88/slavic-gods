@@ -747,3 +747,15 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
 .god.lite .scale .tl .ic { width: 14px; height: 14px; }
 .god.lite .scale .sctot { margin: 0 0 6px; }
 .god.lite .scale .pbar { display: none; }
+
+/* единая заглушка для карточек без картинок (макет) */
+.wheel { display: block; color: var(--gold); }
+.ccnone { background: radial-gradient(circle at 50% 40%, #5a4026, #2f2217); }
+.ccnone .wheel { width: 64px; height: 64px; color: var(--gold2); opacity: .85; }
+.phold { display: flex; align-items: center; justify-content: center; height: 150px; margin: 0 0 14px; border: 1px solid var(--line); border-radius: 6px; background: radial-gradient(circle at 50% 40%, #5a4026, #2f2217); }
+.phold .wheel { width: 84px; height: 84px; }
+.god.nopic h3 { color: var(--gold2); }
+.god.nopic .mark { color: var(--muted); letter-spacing: .04em; text-transform: none; font-size: 15px; margin: 0 0 4px; }
+.god.nopic details.research > summary .rs-hint { display: none; }
+.god.nopic details.research > summary { min-height: 48px; border-radius: 0; }
+@media (max-width: 560px) { .phold { height: 120px; } .phold .wheel { width: 68px; height: 68px; } }
