@@ -653,6 +653,18 @@ ul.sil { list-style: none; margin: 0; padding: 0 !important; display: grid; grid
 .sg-f { background: #050302; border: 2px solid var(--lv-f); box-sizing: border-box; }
 .sg-w { background: transparent; border: 2px solid var(--lv-n); box-sizing: border-box; }
 
+
+/* «Вернуться к чтению» */
+.backread { position: fixed; left: 50%; bottom: 16px; bottom: max(16px, env(safe-area-inset-bottom)); z-index: 6; transform: translate(-50%, 8px); min-height: 46px; max-width: calc(100vw - 156px); padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; font: inherit; font-size: 15px; font-weight: 600; line-height: 1.2; white-space: nowrap; cursor: pointer; color: var(--gold2); background: rgba(22,17,12,.96); border: 1px solid var(--gold); border-radius: 23px; box-shadow: 0 4px 18px rgba(0,0,0,.55); opacity: 0; visibility: hidden; transition: opacity .2s, transform .2s, visibility .2s; -webkit-tap-highlight-color: transparent; }
+.backread.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.backread[hidden] { display: none; }
+.backread .bi { font-size: 18px; line-height: 1; }
+.backread .bs { display: none; }
+.backread:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
+@media (hover:hover){ .backread:hover { background: var(--gold); color: #1a120a; } }
+@media (max-width: 359px){ .backread .bl { display: none; } .backread .bs { display: inline; } }
+@media (prefers-reduced-motion: reduce){ .backread { transition: none; } }
+@media print { .backread { display: none; } }
 </style>
 </head>
 <body id="top">
@@ -1330,6 +1342,7 @@ ul.sil { list-style: none; margin: 0; padding: 0 !important; display: grid; grid
 </section>
 <footer><div class="wrap">Сайт не восстанавливает веру. Он отделяет имя в источнике от догадки и от выдумки. Озвучка — чтение пересказа, не реконструкция молитвы.<br>Часть материалов основана на статьях Википедии (лицензия <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ru" rel="noopener">CC BY-SA 4.0</a>); список статей — в разделе «<a href="#sources">Опора</a>».</div></footer>
 <a class="totop" id="totop" href="#top" aria-label="Наверх"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<button type="button" class="backread" id="backread" aria-label="Вернуться к чтению" hidden><span class="bi" aria-hidden="true">↩</span><span class="bl">Вернуться к чтению</span><span class="bs">К чтению</span></button>
 <button type="button" class="music" id="music" aria-label="Включить музыку" title="Фоновая музыка"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" fill="currentColor"/><circle cx="16.5" cy="16" r="2.5" fill="currentColor"/><path class="slash" d="M3.5 3.5l17 17" stroke-width="2.2" stroke-linecap="round"/></svg></button>
 <script>
 (function () {
@@ -1386,11 +1399,119 @@ ul.sil { list-style: none; margin: 0; padding: 0 !important; display: grid; grid
     var el = document.getElementById(id);
     if (!el) return;
     reveal('#' + id);
-    history.pushState(null, '', '#' + id);
+    markJump(id);
+    history.pushState({ sgIdx: ++hIdx }, '', '#' + id);
     el.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
     if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
     try { el.focus({ preventScroll: true }); } catch (e) {}
   }
+
+
+  /* «Вернуться к чтению»: запоминаем место до перехода по якорю; «Назад» браузера тоже возвращает на него */
+  var hIdx = (history.state && history.state.sgIdx) || 0;
+  try { history.replaceState(Object.assign({}, history.state, { sgIdx: hIdx }), ''); } catch (e) {}
+  var backBtn = $('#backread');
+  var ret = null, retTimer = 0, MINY = 200;
+  function absTop(el) { return el.getBoundingClientRect().top + window.pageYOffset; }
+  function readPos() {
+    var th = nav.offsetHeight + 20, best = null, bt = -1e9, hd = null, ht = -1e9, y = window.pageYOffset;
+    var all = document.querySelectorAll('[id]');
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.namespaceURI !== 'http://www.w3.org/1999/xhtml') continue;
+      if (nav.contains(el) || el.classList.contains('music') || el.classList.contains('totop') || el === backBtn) continue;
+      var r = el.getBoundingClientRect();
+      if (!r.height || r.top > th) continue;
+      if (r.top > bt) { bt = r.top; best = el; }
+    }
+    $$('h2,h3').forEach(function (h) {
+      var r = h.getBoundingClientRect();
+      if (r.height && r.top <= th && r.top > ht) { ht = r.top; hd = h; }
+    });
+    return { y: y, a: best ? best.id : '', d: best ? y - absTop(best) : 0, label: hd ? hd.textContent.replace(/\s+/g, ' ').trim().slice(0, 60) : '' };
+  }
+  function posY(p) {
+    var el = p.a ? document.getElementById(p.a) : null;
+    return Math.max(0, el && el.getBoundingClientRect().height ? absTop(el) + p.d : p.y);
+  }
+  function hideBack() {
+    clearTimeout(retTimer); ret = null;
+    backBtn.classList.remove('show');
+    setTimeout(function () { if (!ret) backBtn.hidden = true; }, 250);
+  }
+  function showBack() {
+    backBtn.setAttribute('aria-label', 'Вернуться к чтению' + (ret.label ? ': ' + ret.label : ''));
+    backBtn.title = ret.label ? 'Вернуться к месту: ' + ret.label : 'Вернуться к месту чтения';
+    backBtn.hidden = false;
+    void backBtn.offsetWidth;
+    backBtn.classList.add('show');
+    clearTimeout(retTimer);
+    retTimer = setTimeout(hideBack, 180000);
+  }
+  /* вызывается до перехода: сохраняем позицию в текущей записи истории и запоминаем место чтения */
+  function markJump(id) {
+    var p = readPos(), y = p.y;
+    try { history.replaceState(Object.assign({}, history.state, { sgIdx: hIdx, sgY: p.y, sgA: p.a, sgD: p.d }), ''); } catch (e) {}
+    var te = id === 'top' || !id ? document.body : document.getElementById(id);
+    var land = te ? Math.max(0, absTop(te) - nav.offsetHeight - 10) : 0;
+    var vh = window.innerHeight;
+    if (ret && Math.abs(y - ret.land) < vh * 1.5) { ret.land = land; ret.idx = ret.idx; return; }   /* цепочка переходов: точка чтения остаётся первой */
+    if (ret) hideBack();
+    if (y < MINY || Math.abs(land - y) < 300) return;
+    ret = { y: p.y, a: p.a, d: p.d, label: p.label, land: land, idx: hIdx, left: false };
+    showBack();
+  }
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.target === '_blank') return;
+    var h = a.getAttribute('href');
+    if (h.length < 2) return;
+    var id; try { id = decodeURIComponent(h.slice(1)); } catch (x) { return; }
+    if (id !== 'top' && !document.getElementById(id)) return;
+    markJump(id);
+  }, true);
+  window.addEventListener('scroll', function () {
+    if (!ret) return;
+    var dy = Math.abs(window.pageYOffset - ret.y);
+    if (dy > 400) ret.left = true;
+    else if (ret.left && dy < 120) hideBack();
+  }, { passive: true });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ret && !navEl.classList.contains('open')) { hideBack(); } });
+  backBtn.addEventListener('click', function () {
+    if (!ret) return;
+    var r = ret, n = hIdx - r.idx, target = posY(r);
+    hideBack();
+    var finish = function () {
+      var af = document.getElementById(r.a);
+      if (af) { if (!af.hasAttribute('tabindex')) af.setAttribute('tabindex', '-1'); try { af.focus({ preventScroll: true }); } catch (x) {} }
+      if (n > 0 && Math.abs(window.pageYOffset - target) < 150) { quiet = target; try { history.go(-n); } catch (x) { quiet = null; } }
+    };
+    if (reduce) { window.scrollTo({ top: target, behavior: 'auto' }); finish(); return; }
+    window.scrollTo({ top: target, behavior: 'smooth' });
+    var t0 = Date.now(), iv = setInterval(function () {
+      if (Math.abs(window.pageYOffset - target) < 3 || Date.now() - t0 > 1500) { clearInterval(iv); finish(); }
+    }, 60);
+  });
+  var quiet = null;
+  window.addEventListener('popstate', function (e) {
+    var st = e.state;
+    if (!st || st.sgIdx == null) return;   /* обычный якорный переход (не возврат по истории) */
+    hIdx = st.sgIdx;
+    if (ret) hideBack();
+    var tgt = quiet;
+    quiet = null;
+    if (tgt == null && st && st.sgY != null) tgt = posY({ a: st.sgA, d: st.sgD, y: st.sgY });
+    if (tgt == null) return;
+    var go = function () { window.scrollTo({ top: tgt, behavior: 'instant' }); };
+    go(); requestAnimationFrame(go); setTimeout(go, 120);
+  });
+  window.addEventListener('hashchange', function () {
+    /* новая запись истории от обычной якорной ссылки: нумеруем её */
+    if (history.state && history.state.sgIdx != null) return;
+    hIdx++;
+    try { history.replaceState({ sgIdx: hIdx }, ''); } catch (e) {}
+  });
 
   /* каталог: фильтры и поиск */
   (function () {
