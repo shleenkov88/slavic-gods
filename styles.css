@@ -830,3 +830,6 @@ details.research[open], details.scaled[open], details.fullhow[open], details.cur
 }
 @media (max-width: 340px) { .catlegend .clist { grid-template-columns: 1fr; } }
 @media print { .catlegend .cla { display: none; } }
+
+/* hero: на планшетах картинка 4:5 по центру, чтобы не обрезались столбы */
+@media (min-width: 421px) and (max-width: 860px) { .hero img { display: block; width: min(100%, 336px); margin: 0 auto; } }
