@@ -297,6 +297,11 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
 .lg p { margin: 6px 0 0; font-size: 16px; line-height: 1.4; }
 .lg .lgn { color: var(--muted); font-size: 15px; font-style: italic; }
 .lgx { margin: 6px 0 4px; font-size: 16px; color: var(--muted); max-width: 900px; }
+.hint4 { margin: 14px 0 8px; max-width: 520px; }
+.hero .lede { font-size: 18px; margin: 10px 0 16px; }
+.hint4t { margin: 0; color: var(--muted); font-size: 15px; }
+.hint4 .lvchips { margin: 8px 0; }
+.hint4a { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold); font-size: 15px; }
 .lvchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .lvchip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--lvc); color: var(--lvc); padding: 4px 10px; font-size: 14px; letter-spacing: .05em; text-transform: uppercase; background: rgba(12,8,6,.35); }
 @media (max-width: 860px) { .legend { grid-template-columns: 1fr 1fr; } }
@@ -695,13 +700,6 @@ ul.sil { list-style: none; margin: 0; padding: 0 !important; display: grid; grid
 .sbtn-main span { color: #3a2a14; }
 @media (hover:hover){ .sbtn:hover { background: rgba(198,161,91,.22); color: #fff3d6; } .sbtn-main:hover { background: var(--gold2); color: #1a120a; } }
 .sbtn:focus-visible { outline: 3px solid var(--gold2); outline-offset: 3px; }
-.hint4 { margin: 0 0 8px; max-width: 520px; }
-.hint4 > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--gold); font-size: 15px; letter-spacing: .04em; }
-.hint4 > summary::-webkit-details-marker { display: none; }
-.hint4 > summary::before { content: "▸"; transition: transform .2s; }
-.hint4[open] > summary::before { transform: rotate(90deg); }
-.hint4 > summary:focus-visible, .morebox > summary:focus-visible { outline: 2px solid var(--gold2); outline-offset: 2px; }
-.hint4b .lede { font-size: 17px; }
 .hero audio { margin-top: 6px; }
 .morebox { margin: 4px 0 0; }
 .morebox > summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 10px 18px; font-family: "Ruslan Display", serif; font-size: 22px; letter-spacing: .03em; color: var(--gold2); background: rgba(22,17,12,.9); border: 1px solid var(--gold); -webkit-tap-highlight-color: transparent; }
@@ -789,24 +787,20 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
     <div class="kicker">Что известно о славянских богах</div>
     <h1>Не пантеон, а обломки</h1>
     <p class="subtitle">Что о славянских богах известно точно, а что придумано позже.</p>
+    <p class="lede">Священной книги не было. Общего списка богов для всех славян тоже. Ниже только основные имена: те, что стоят в средневековых текстах, и рядом — те, которые к богам приписали позже.</p>
     <nav class="start" aria-label="С чего начать">
       <a class="sbtn sbtn-main" href="#main-gods"><strong>Начать с главного</strong><span>Перун, Велес, Мокошь, Дажьбог</span></a>
       <a class="sbtn" href="#myths"><strong>Что правда, а что выдумка</strong><span>популярные мифы и ответы</span></a>
       <a class="sbtn" href="#catalog" data-openmore="1"><strong>Все боги</strong><span>полный каталог с поиском</span></a>
     </nav>
-    <details class="hint4">
-      <summary>Как читать это: 4 значка</summary>
-      <div class="hint4b">
-        <div class="lvchips" role="list" aria-label="Уровни достоверности">
+    <div class="hint4"><p class="hint4t">Значки у фактов в тексте:</p>
+    <div class="lvchips" role="list" aria-label="Уровни достоверности">
       <span class="lvchip lg-s" role="listitem"><i class="ic ic-s" aria-hidden="true"></i>источник</span>
       <span class="lvchip lg-h" role="listitem"><i class="ic ic-h" aria-hidden="true"></i>гипотеза</span>
       <span class="lvchip lg-l" role="listitem"><i class="ic ic-l" aria-hidden="true"></i>поздняя реконструкция</span>
       <span class="lvchip lg-f" role="listitem"><i class="ic ic-f" aria-hidden="true"></i>выдумка / подделка</span>
     </div>
-        <p class="lede">Священной книги не было. Общего списка богов для всех славян тоже. Ниже только основные имена: те, что стоят в средневековых текстах, и рядом — те, которые к богам приписали позже.</p>
-        <p class="note">Подробно о значках — в разделе «<a href="#legend">Как читать метки</a>».</p>
-      </div>
-    </details>
+    <a class="hint4a" href="#how">Что они значат →</a></div>
     <audio controls preload="none" src="audio/intro.mp3" data-title="Введение"></audio>
     <p class="cap">Голос читает короткий пересказ. Полный разбор — в тексте. Иллюстрации — художественные образы, не портреты идолов.</p>
   </div>
@@ -1554,7 +1548,7 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
   function syncDetails() { if (mq.matches) $$('details.src:not(.s-refs), details.briefd').forEach(function (d) { d.open = true; }); }
   syncDetails();
   if (mq.addEventListener) mq.addEventListener('change', syncDetails);
-  window.addEventListener('beforeprint', function () { $$('details.src, details.morebox, details.hint4, details.scaled, details.briefd, details.curio, details.fullhow').forEach(function (d) { d.open = true; }); });
+  window.addEventListener('beforeprint', function () { $$('details.src, details.morebox, details.scaled, details.briefd, details.curio, details.fullhow').forEach(function (d) { d.open = true; }); });
 
   /* якорь внутри свёрнутого блока: раскрыть всё, что его закрывает */
   function reveal(raw) {
