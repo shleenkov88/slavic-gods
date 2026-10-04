@@ -18,6 +18,7 @@ https://shleenkov88.github.io/slavic-gods/
 - `tools/ambient.py` — скрипт, которым музыка синтезирована с нуля (numpy: низкий медленный гул на основе ре, тёмный шум, реверберация; без ударных и мелодии).
 - `tools/encode_ambient.py` — кодирует синтез в mp3 так, чтобы на стыке петли не было щелчка.
 - `fonts/` — шрифты Ruslan Display и Philosopher (кириллица и латиница, `woff2`, лицензия SIL OFL).
+- `tools/build_map.py` — собирает подложку карты источников (береговые линии, озёра, реки) из данных Natural Earth (общественное достояние, https://github.com/nvkelso/natural-earth-vector, ne_10m_land / ne_10m_lakes / ne_10m_rivers_lake_centerlines) в упрощённые SVG-path, которые вставлены в `index.html` (раздел `#map`). Берега современные; в IX–XII веках они местами были иными.
 - `favicon.svg`, `apple-touch-icon.png` — значки сайта.
 
 ## Музыка
