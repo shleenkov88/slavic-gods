@@ -1001,3 +1001,14 @@ ul.sc li { line-height: 1.5; }
 @media (max-width: 374px) { .era h3 { font-size: 20px; letter-spacing: .01em; } }
 /* «Ещё персонажи (20) Свернуть» в раскрытом виде не помещалось на 320px */
 @media (max-width: 420px) { .morebox > summary { flex-wrap: wrap; row-gap: 6px; } }
+
+/* Шкала по группам (пилот: Перун) */
+.scale.grouped .sct { margin-bottom: 4px; }
+.scale.grouped .scg { margin: 20px 0 0; }
+.scale.grouped .scg:first-of-type { margin-top: 12px; }
+.scale.grouped .scgh { display: flex; align-items: center; gap: 8px; margin: 0 0 2px; padding-bottom: 6px; border-bottom: 1px solid var(--lvc); font-family: "Philosopher", Palatino, serif; font-weight: 700; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--lvc); }
+.scale.grouped .scgh .ic { width: 14px; height: 14px; flex: none; }
+.scale.grouped ul.sc li { gap: 10px; padding: 11px 0; font-size: 17px; line-height: 1.55; border-top: 1px solid rgba(198,161,91,.14); }
+.scale.grouped ul.sc li:first-child { border-top: 0; }
+.scale.grouped ul.sc .ic { margin-top: 7px; }
+.scale.grouped .itl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
