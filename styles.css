@@ -69,7 +69,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--m
 html { scroll-padding-top: calc(var(--navh, 64px) + 8px); }
 img { height: auto; }
 :focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
-nav { position: sticky; top: 0; z-index: 5; background: rgba(12,9,7,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+#nav { position: sticky; top: 0; z-index: 5; background: rgba(12,9,7,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .navrow { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 12px 0; }
 .brand { font-family: "Ruslan Display", serif; letter-spacing: .04em; color: var(--gold2); font-size: 22px; text-decoration: none; white-space: nowrap; }
 .navlinks { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; }
@@ -185,7 +185,7 @@ section.wrap > h2 { margin-top: 0; }
 .god { margin: 0 0 26px; padding: 26px; border: 1px solid var(--line); }
 .god:first-of-type { margin-top: 8px; }
 footer { position: relative; margin-top: 46px; border-top: 0; background: rgba(8,4,3,.38); }
-nav { background: rgba(24,17,13,.86); backdrop-filter: blur(12px) saturate(1.2); -webkit-backdrop-filter: blur(12px) saturate(1.2); box-shadow: 0 6px 22px rgba(0,0,0,.35); border-bottom-color: rgba(198,161,91,.45); }
+#nav { background: rgba(24,17,13,.86); backdrop-filter: blur(12px) saturate(1.2); -webkit-backdrop-filter: blur(12px) saturate(1.2); box-shadow: 0 6px 22px rgba(0,0,0,.35); border-bottom-color: rgba(198,161,91,.45); }
 .totop, .music:not(.is-on) { background: rgba(33,23,18,.95); }
 ::selection { background: rgba(198,161,91,.35); color: #fff6e4; }
 @media (max-width: 860px) {
