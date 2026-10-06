@@ -288,14 +288,6 @@ h1 { font-size: clamp(44px, 8vw, 86px); margin: 8px 0 14px; text-wrap: balance; 
 /* шкала достоверности */
 .scale { margin: 0 0 16px; padding: 14px 16px 12px; border: 1px solid var(--line); background: rgba(8,4,3,.28); }
 .sct { margin: 0 0 10px; font-family: "Ruslan Display", serif; font-size: 24px; line-height: 1.2; letter-spacing: .03em; }
-.tally { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 10px; }
-.tl { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 6px; padding: 7px 8px; border: 1px solid var(--lvc); border-top-width: 3px; background: rgba(12,8,6,.4); color: var(--lvc); }
-.tl .ic { width: 12px; height: 12px; }
-.tl b { font-size: 26px; line-height: 1; font-weight: 700; }
-.tl span { font-size: 13px; line-height: 1.15; letter-spacing: .02em; color: var(--ink); }
-.tl-s { --lvc: var(--lv-s); } .tl-h { --lvc: var(--lv-h); } .tl-l { --lvc: var(--lv-l); } .tl-f { --lvc: var(--lv-f); }
-.tl-0 { opacity: .5; }
-.tlw { margin: 0 0 8px; font-size: 15px; color: var(--muted); }
 ul.sc { list-style: none; margin: 0; padding: 0 !important; }
 ul.sc li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; margin: 0; padding: 8px 0; border-top: 1px solid rgba(198,161,91,.18); font-size: 16px; line-height: 1.4; }
 ul.sc .ic { margin-top: 5px; }
@@ -319,7 +311,6 @@ html { scroll-padding-top: 0; }
 @media (max-width: 860px) {
   .brief dl { grid-template-columns: 1fr; gap: 12px; }
   .brief dd { font-size: 17px; }
-  .tally { grid-template-columns: 1fr 1fr; }
   .sct { font-size: 22px; }
   .scale { padding: 12px 12px 10px; }
 }
@@ -406,8 +397,7 @@ ul.chips { grid-template-columns: repeat(4, 1fr); gap: 10px; }
 nav .here, nav .menubtn { display: none; }
 .navlinks a.sec { font-weight: 700; }
 @media (min-width: 861px) and (max-width: 1040px) { .brief dl { grid-template-columns: 1fr; } }
-.god > div, .brief dl > div, .tl { min-width: 0; }
-@media (max-width: 420px), (min-width: 861px) and (max-width: 1160px) { .tally { grid-template-columns: 1fr 1fr; } }
+.god > div, .brief dl > div { min-width: 0; }
 @media (max-width: 340px) { nav .navrow .here { display: none; } nav .navrow .brand { font-size: 17px; } }
 @media (min-width: 1120px) { .navlinks { gap: 0 14px; } .navlinks a, .brand { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; } }
 @media (max-width: 1119px) {
@@ -433,7 +423,7 @@ nav .here, nav .menubtn { display: none; }
   .ptime { font-size: 14px; }
   .pseek { height: 44px; }
   details.src > summary { font-size: 15px; padding: 10px 2px; }
-  .scn, .lg .lgn, .tlw, .rs-hint, footer, .god .src-note, .lgx { font-size: 16px; }
+  .scn, .lg .lgn, .rs-hint, footer, .god .src-note, .lgx { font-size: 16px; }
   .ccd, .ccp { font-size: 16px; }
   .wrap { width: min(1120px, calc(100% - 28px)); }
 }
@@ -638,16 +628,6 @@ ul.sil { list-style: none; margin: 0; padding: 0 !important; display: grid; grid
 
 
 /* итог шкалы */
-.sctot { margin: 0 0 12px; }
-.sctot .sct2 { margin: 0 0 6px; color: var(--ink); }
-.sctot .sct2 b { font-size: 20px; }
-.pbar { display: flex; gap: 2px; height: 12px; }
-.pbar .seg { display: block; min-width: 6px; height: 100%; }
-.sg-s { background: var(--lv-s); }
-.sg-h { background: var(--lv-h); }
-.sg-l { background: var(--lv-l); }
-.sg-f { background: #050302; border: 2px solid var(--lv-f); box-sizing: border-box; }
-.sg-w { background: transparent; border: 2px solid var(--lv-n); box-sizing: border-box; }
 
 
 /* «Вернуться к чтению» */
@@ -740,13 +720,6 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
 
 /* Хорс: упрощённая раскрытая карточка (пробный вариант, остальные карточки пока прежние) */
 .god.lite .scale > h4.bh { display: none; }
-.god.lite .scale .tally { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 8px; }
-.god.lite .scale .tl { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; }
-.god.lite .scale .tl b { font-size: 20px; }
-.god.lite .scale .tl span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.god.lite .scale .tl .ic { width: 14px; height: 14px; }
-.god.lite .scale .sctot { margin: 0 0 6px; }
-.god.lite .scale .pbar { display: none; }
 
 /* единая заглушка для карточек без картинок (макет) */
 .wheel { display: block; color: var(--gold); }
@@ -764,8 +737,8 @@ details.curio > section.wrap > h2 { margin-top: 6px; }
 /* основной читаемый текст — не меньше 16px; подписи, пояснения и курсив — не меньше 15px; плашки и метки — не меньше 14px */
 dt, li.gl-l, span.yr, span.sw, .mark, .ccd, .hxw, .lgh, .hint4t, .hint4a, .backread .bl, .backread .bs, .plbtn b, .ctl b, details.src > summary, summary.bh, .p-read, p.scn, p.lgn, p.src-note, .research-body .src-note { font-size: 16px; }
 p.scn, p.lgn, .src-note { font-style: italic; }
-.rs-hint, .fwhy, .ill, .ill strong, .ill span, p.cap, .cap, .note, p.note, figcaption, .mapcap, p.pk, p.rgn, .maplegend li, p.mx, small, .plbtn small, .ptime, .sbtn, .sbtn span, h4.bh, .stt, .tlw, p.tlw, footer .wrap { font-size: 15px; }
-.tg, .badge, .chl, .srcb span, .tl span, .tl, .ccill, .ccno, .lvchip, .hxl, .kicker, .grat em, .mknames em, .mknames span, .menubtn span { font-size: 14px; }
+.rs-hint, .fwhy, .ill, .ill strong, .ill span, p.cap, .cap, .note, p.note, figcaption, .mapcap, p.pk, p.rgn, .maplegend li, p.mx, small, .plbtn small, .ptime, .sbtn, .sbtn span, h4.bh, .stt, footer .wrap { font-size: 15px; }
+.tg, .badge, .chl, .srcb span, .ccill, .ccno, .lvchip, .hxl, .kicker, .grat em, .mknames em, .mknames span, .menubtn span { font-size: 14px; }
 .ill, .ill strong { font-size: 15px; }
 p.cap, .cap, figcaption, .mapcap { font-style: italic; }
 @media (max-width: 860px) { .card span { font-size: 15px; } }
@@ -1002,7 +975,7 @@ ul.sc li { line-height: 1.5; }
 /* «Ещё персонажи (20) Свернуть» в раскрытом виде не помещалось на 320px */
 @media (max-width: 420px) { .morebox > summary { flex-wrap: wrap; row-gap: 6px; } }
 
-/* Шкала по группам (пилот: Перун) */
+/* Шкала по группам */
 .scale.grouped .sct { margin-bottom: 4px; }
 .scale.grouped .scg { margin: 20px 0 0; }
 .scale.grouped .scg:first-of-type { margin-top: 12px; }
@@ -1012,3 +985,4 @@ ul.sc li { line-height: 1.5; }
 .scale.grouped ul.sc li:first-child { border-top: 0; }
 .scale.grouped ul.sc .ic { margin-top: 7px; }
 .scale.grouped .itl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.scale.grouped .scg.mixed .itl { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
